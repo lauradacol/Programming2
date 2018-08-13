@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Álbum da Flávia</title>
+		
+		<style type="text/css">
+		<!--POR QUE FUNCIONA COMENTADO?-->
+		div.tabbed {
+			position: absolute;
+			top: 40px;
+			left: 40px;
+		}
+
+		div.tabs a {
+			font-family: Verdana, Arial, Helvetica, sans-serif;
+			font-size: smaller;
+			color: #E66419;
+			background-color: #A0D6E3;
+			<!--border: 1px solid #ddd;-->
+			margin-right: 2px;
+			padding: 0px 2px;
+			-moz-border-radius: 5px 5px 0px 0px;
+		}
+
+		div.tab {
+			display: none;
+			height: 250px;
+			<!--border: 1px solid #ddd;-->
+			-moz-border-radius: 0px 0px 5px 5px;
+			text-align: center;
+		}
+
+		div.tab:target {
+			display: block;
+		}
+
+		:target div.tab {
+			display: block;
+		}
+		:target div.tab + div.tab{
+			display: none;
+		}
+
+		div.head {
+			border: 1px solid black;
+			background-color: lightblue;
+			padding-top: 50px;
+			padding-right: 30px;
+			padding-bottom: 50px;
+			padding-left: 80px;
+		}	
+
+
+		
+		
+		</style>
+	</head>
+
+	<body>
+
+		<div class ="head"><h1>Álbum da Flávia</h1></div>
+		
+		
+		<!-- <img src="02 contracapa.png" alt="Avatar" style="width:700px"> -->
+		
+		<div class="tabbed">
+			<div class="tabs">
+			<a href="#desc">Descoberta</a>
+			<a href="#tell">Contando a Novidade</a>
+			<a href="#wait">A espera</a>
+			<a href="#arrive">A chegada</a>
+			<a href="#month">Mês a mês</a>
+			<a href="#filter">Filtros</a></div>
+			
+			<div id="desc" class="tab">
+				<p>A Descoberta</p>
+				<img src="03.0 descoberta.png" alt="Avatar" style="width:700px">
+			</div>
+			
+			<div id="tell" class="tab">
+				<p>Contando a Novidade</p>
+				<img src="04.0contando.png" alt="Avatar" style="width:700px">
+			  </div>
+			
+			<div id="wait" class="tab">
+				<p>Netscape</p>
+				<p>bla bla bla bla</p>
+				<p>bla bla bla</p>
+			  </div>
+			<div id="arrive" class="tab">
+				<p>Others</p>
+				<p>bla bla bla bla</p>
+				<p>bla bla bla</p>
+			  </div>
+			<div id="month" class="tab">
+				<p>Others</p>
+				<p>bla bla bla bla</p>
+				<p>bla bla bla</p>
+			  </div>
+			<div id="filter" class="tab">
+				<p>Others</p>
+				<p>bla bla bla bla</p>
+				<p>bla bla bla</p>
+			  </div>
+		</div>
+
+
+
+	</body>
+</html>
