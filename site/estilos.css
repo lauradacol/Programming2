@@ -1,6 +1,7 @@
-*.{
+body{
 	padding: 0px;
 	margin: 0px;
+	font-family: arial;
 }
 
 h1{
@@ -10,15 +11,27 @@ h1{
 
 table, th, td{
 	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+td:hover{
+	background-color: orange;
+}
+
+tr:nth-child(even){
+	background-color: lightyellow;
+}
+
+tr:nth-child(odd){
+	background-color: lightblue;
 }
 
 a{
-	text-decoration: none;
-	
+	text-decoration: none;	
 }
 
 a:link{
-	color: black;
+	color: white;
 }
 
 a:visited{
@@ -30,7 +43,7 @@ a:active{
 }
 
 a:hover{
-	background-color: white;
+	background-color: black;
 }
 
 .menu{
@@ -51,20 +64,90 @@ a:hover{
 }
 	
 header{
-	background-color: #990000;
+	background-color: #CC0000;
 	padding: 10px
 }
 
 nav{
-	background-color: #000000;
+	background-color: #637e98;
 	padding: 10px;
 }
 
 main{
 	background-color: #637e98;
+	margin: 10px;
 }
 
 footer{
 	background-color: #990000;
 	padding: 10px;
+	clear: left;
+}
+/*Regras do Formulário*/
+input[type="text"], input[type="email"], select, textarea{
+	border: 1px solid black;
+	margin: 10px 0px;
+	border-radius: 15px;
+	padding: 5px 20px;
+	background-color: #CCFFFF;
+	color: darkblue;
+	font-family: monospace;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, select:focus, textarea:focus{
+	border: 5px solid orange;
+	background-color: #FFFFFF;
+	font-weight: bold;
+}
+
+input[type="email"]:valid{
+	color: green;
+}
+
+input[type="email"]:invalid{
+	color: red;
+}
+
+input[type="submit"], input[type="reset"]{
+	background-color: red;
+	color: 507913;
+	width: 200px;
+	height: 40px;
+	font-weight: bold;
+	border: 15;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover{
+	background-color: orange;
+	color: darkblue;
+}
+
+.label-alinhado{
+	width: 70px;
+	display: inline-block;
+	text-align: right;
+}
+
+fieldset{
+	width: 500px;
+}
+
+figure{
+	float: left;
+	width: 300px;
+}
+
+figure img{
+	width: 200px;
+	height: 120px;
+}
+
+figure img:hover{
+	box-shadow: 5px 5px 50px red;
+	transform: scale(1.2) rotate(-5deg);
+	transition: 0.7s;
+}
+
+#link{
+	clear: left;
 }

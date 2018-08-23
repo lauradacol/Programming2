@@ -32,18 +32,18 @@
 		
 			<form action="" method="get">
 				<div>
-					<label for="nome">Nome: </label>
-					<input type="text" name="nome" id="nome" size="50">			
+					<label for="nome" class="label-alinhado">Nome: </label>
+					<input type="text" name="nome" id="nome" size="50" required>			
 				</div>
 
 				<div>
-					<label for="email">E-mail: </label>
-					<input type="email" name="email" id="email">				
+					<label for="email" class="label-alinhado">E-mail: </label>
+					<input type="email" name="email" id="email" placeholder="exemplo@exemplo.com" required>				
 				</div>
 		
 				<div>
-					<label for="telefone">Telefone: </label>
-					<input type="text" name="telefone" id="telefone">				
+					<label for="telefone" class="label-alinhado">Telefone: </label>
+					<input type="text" name="telefone" id="telefone" placeholder="(xx)xxxxx-xxxx">				
 				</div>
 		
 				<fieldset>
@@ -55,15 +55,14 @@
 				</fieldset>				
 				
 				<div>
-					<label>Assunto:
+					<label for="assunto" class="label-alinhado">Assunto:</label>
 						<select name="assunto">
 							<option value="0">Selecione</option>
 							<option value="1">Dúvidas</option>
 							<option value="2">Orçamento</option>
 							<option value="3">Críticas</option>					
 							<option value="3">Sugestões</option>					
-						</select>
-					</label>
+						</select>					
 				</div>
 				
 				<div>
@@ -76,7 +75,7 @@
 				
 				<div>
 					<label>Mensagem:<br>
-						<textarea name="msg"></textarea>
+						<textarea name="msg" rows="10" cols="60"></textarea>
 					</label>
 				</div>
 				
