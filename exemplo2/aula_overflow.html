@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Exemplos de posicionamento</title>
+    <style>
+    	div#normal{
+    		background-color: lightblue;
+    	}
+
+		div#rolagem, div#visivel, div#auto, div#oculto {
+			background-color:lightgreen;
+			width:200px;
+			height:150px;
+		}
+
+		div#rolagem{
+			overflow: scroll;
+		}
+		div#auto{
+			overflow: auto;
+		}
+		div#visivel{
+			overflow: visible;
+		}	
+		div#oculto{
+			overflow: hidden;
+		}
+	</style>
+
+  </head>
+
+  <body>
+
+	<h1>Overflow</h1>
+	<p>Quando a altura de um elemento de bloco não é dada explicitamente, ele se ajustará ao conteúdo:</p>
+	<div id="normal"><p>Esta div cresce em altura e largura conforme a necessidade.</p>
+		<p>Quanto mais linhas de texto houver, maior será a altura.</p>
+		<p>Veja só!</p>
+	</div>
+		
+	<p>
+	Quando largura e/ou altura são definidas explicitamente, a propriedade sobrecarga (overflow) decide
+	o que fazer se o conteúdo dentro do elemento exceder as propriedades de largura e altura dadas. </p>
+
+	<p>Se você configurar a propriedade overflow para rolar (scroll), barras de rolagem (scrollbars) serão adicionadas ao elemento:</p>
+	<div id="rolagem">
+	Você pode usar a propriedade overflow quando quiser ter melhor controle do layout.<br><br>
+	Tente mudar a propriedade overflow para: visible, hidden, auto, or inherit e veja o que acontece. O valor padrão (default) é visivel.
+	</div>
+
+	<p>Ou se configurar como "auto", as barras aparecerão somente quando necessário:</p>
+	<div id="auto">
+	Você pode usar a propriedade overflow quando quiser ter melhor controle do layout.<br><br>
+	Tente mudar a propriedade overflow para: visible, hidden, auto, or inherit e veja o que acontece. O valor padrão (default) é visivel.
+	</div>
+
+	<p>Mas se configurar como "visible", que é o valor default, o texto será renderizado para fora do elemento:</p>
+	<div id="visivel">
+	Você pode usar a propriedade overflow quando quiser ter melhor controle do layout.<br><br>
+	Tente mudar a propriedade overflow para: visible, hidden, auto, or inherit e veja o que acontece. O valor padrão (default) é visivel.
+	</div>
+
+	<p>&nbsp;</p>
+	<p>Já se o valor for "hidden", o texto será cortado:</p>
+	<div id="oculto">
+	Você pode usar a propriedade overflow quando quiser ter melhor controle do layout.<br><br>
+	Tente mudar a propriedade overflow para: visible, hidden, auto, or inherit e veja o que acontece. O valor padrão (default) é visivel.
+	</div>
+</body>
+</html>

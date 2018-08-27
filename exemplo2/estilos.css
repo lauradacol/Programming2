@@ -1,0 +1,113 @@
+*{
+	box-sizing: border-box;
+}
+
+body{
+	font-family: "Lucida Sans", sans-serif;
+}
+
+header, footer{
+	background-color: #37166A;
+	color: #FFFFFF;
+	padding: 15px;
+}
+
+aside{
+	background-color: #000000;
+	margin-top: 5px;
+	color: #FFFFFF;
+}
+
+aside:hover{
+	background-color: #DC1107;
+}
+
+nav ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+nav li{
+	padding: 8px;
+	margin-bottom: 8px;
+	background-color: #000000;
+	color: #FFFFFF;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.50);
+}
+
+nav li:hover{
+	background-color: #DC1107;
+}
+
+#col-1{
+	width: 20%;
+}
+
+#col-2{
+	width: 60%;
+}
+
+#col-3{
+	width: 20%;
+
+}
+
+#col-1, #col-2, #col-3{
+	float: left;
+	padding: 5px;
+}
+
+footer{
+	clear: left;
+}
+
+.container{
+	background-color: #DADADA;
+	overflow: hidden;
+	text-align: justify;
+}
+
+#img1{
+	width: 200px;
+	float: right;
+}
+
+#img2{
+	width: 300px;
+	float: left;
+	margin-bottom: 5px;
+	margin-right: 5px;
+}
+
+.clear{
+	clear:both;
+}
+
+header{
+	position: relative;
+}
+
+#titulo{
+	position: relative;
+	left: 0px;
+	top: 30px;
+	font-family: "Metamorphous";
+}
+
+#login{
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+}
+
+#contato{
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 200px;
+	background-color: pink;
+}
+
+
+
