@@ -40,20 +40,8 @@ nav li:hover{
 	background-color: #DC1107;
 }
 
-#col-1{
-	width: 20%;
-}
-
-#col-2{
-	width: 60%;
-}
-
-#col-3{
-	width: 20%;
-
-}
-
 #col-1, #col-2, #col-3{
+	width: 100%;
 	float: left;
 	padding: 5px;
 }
@@ -69,12 +57,14 @@ footer{
 }
 
 #img1{
-	width: 200px;
+	width: 100%;
+	max-width: 500px;
 	float: right;
 }
 
 #img2{
-	width: 300px;
+	width: 50%;
+	max-width: 500px;
 	float: left;
 	margin-bottom: 5px;
 	margin-right: 5px;
@@ -107,7 +97,33 @@ header{
 	right: 0;
 	width: 200px;
 	background-color: pink;
+	display: none;
 }
 
+@media only screen and (min-width: 600px){
+	#col-1{
+		width: 20%;
+	}
 
+	#col-2{
+		width: 80%;
+	}
+}
 
+@media only screen and (min-width: 1200px){
+	#col-1{
+		width: 20%;
+	}
+
+	#col-2{
+		width: 60%;
+	}
+	
+	#col-3{
+		width: 20%
+	}
+	
+	#contato{
+		display: block;
+	}
+}
