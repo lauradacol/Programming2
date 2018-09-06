@@ -1,0 +1,150 @@
+*{
+	box-sizing: border-box;
+}
+
+body{
+	margin: 0;
+	font-family: "Lucida Sans", sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+/************************************** header */
+header{
+	background-color: #5995DA;
+	color: #FFF;
+	padding: 10px;
+	position: relative;
+}
+
+header a{
+	color: #FFF;
+}
+
+header h1{
+	left: 20px;
+	font-family: Lobster;
+	font-size: 3em;
+	text-shadow: 2px 2px 2px #000;
+}
+
+.carrinho{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.menu-opcoes a:hover{
+	text-shadow: 2px 2px 2px #000;
+	border-bottom: 2px solid white;
+}
+
+/************************************** produtos */
+div.produtos{
+	width: 200px;
+	height: 200px;
+	margin: 10px;
+	background-color: withe; 
+	text-align: center;
+}
+
+div.produto figure{
+	margin: 0;
+}
+
+div.produto img{
+	width: 150px;
+	height: 150px;
+}
+
+div.produto a{
+	color: #555;	
+}
+
+div.produto .preco{
+	color: red;
+	font-weight: bold;
+	display: block;
+}
+
+div.lista-produtos{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+/************************************** layout colunas */
+.col-1, .col-2, .col-3{
+	border: 1px solid blue;
+	width: 100%;
+	float: left;
+}
+
+footer{
+	border: 1px solid blue;
+	clear: both;
+}
+
+.container{
+	background-color: #d6e9fe;
+	overflow: hidden;
+}
+
+.menu-opcoes li{
+	text-transform: uppercase;
+	list-style-type: none;
+}
+
+
+@media only screen and (min-width: 600px){
+	.col-1{
+		width: 30%;
+	}
+	
+	.col-2{
+		width: 70%;
+	}
+	
+	.col-1, .col-2, .col-3{
+		border: 1px solid red;
+	}	
+		
+}
+
+/************************************** media queries */
+@media only screen and (min-width: 1000px){
+	.col-1{
+		width: 20%;		
+	}
+
+	.col-2{
+		width: 60%;
+	}
+	
+	.col-3{
+		width: 20%;
+	}
+	
+	.col-1, .col-2, .col-3{
+		border: 1px solid green;
+	}
+	
+	.menu-opcoes{
+		position: absolute;
+		right: 0;
+		bottom: 0;		
+	}
+	
+	.menu-opcoes li{
+		display: inline;
+		text-transform: uppercase;
+		list-style-type: none;
+		margin-right: 10px;
+	}
+
+	
+}
+
