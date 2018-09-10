@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<title>Página de Exemplo</title>
+		<meta charset="utf-8">	
+	</head>
+
+	<body>
+		<p id="exemplo">Valor inicial</p>
+		
+		<script>
+			alert("Olá mundo!");
+			document.write("testando");
+			console.log("mensagem para o console");		
+			document.getElementById("exemplo").innerHTML = "atualizando texto do parágrafo";				
+		</script>
+		
+		<p id="demo" style="color: red"></p>
+		<button onclick="document.getElementById('demo').innerHTML='Você clicou!'">Clique Aqui</button>
+		
+		<p id="exemplo2"></p>
+		<button id="botao" onclick="displayDate()">Ver data</button>
+
+		<p id="exemplo3"></p>
+		<button id="botao3">Ver data</button>		
+		
+		<script src="js.js"></script>		
+	</body>
+
+</html>
