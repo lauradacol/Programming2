@@ -1,0 +1,115 @@
+/********************************************** config. gerais da estrutura da página */
+body{
+	padding: 0px;
+	margin: 0px;
+	font-family: "Indie Flower", cursive;
+}
+
+a{
+	text-decoration: none;	
+}
+
+a:hover {
+  text-shadow: 2px 2px 2px #000;
+}
+
+a:active {
+  color: #fff;
+}
+
+/********************************************** área superior */
+header{
+	background-color: #cc0099;
+	padding: 10px;
+	position: relative;
+}
+
+nav{
+	background-color: #b390b3;
+	padding: 10px;
+}
+
+.menu{
+	list-style-type: none;	
+}
+
+.menu li{
+	display: inline;
+	margin: 10px;
+}
+
+/*
+.p1{
+	padding: 5px;
+	text-align: justify;
+	font-size: 150%;
+	float: left;
+}
+	
+
+
+main{
+	background-color: #ffccff;
+	margin: 10px;
+}
+
+footer{
+	background-color: #b390b3;
+	padding: 10px;
+	clear: left;
+}
+
+.figs_desc{
+	float: right;
+	width: 50%;
+}
+
+figure{
+	float: left;
+	width: 150px;	
+}
+
+
+figure img{
+	width: 60%;
+	height: 60%;
+}
+
+figure img:hover, #ovinho:hover{
+	box-shadow: 15px 15px 50px pink;
+	transform: scale(3);
+	transition: 0.7s;
+}
+
+figcaption{
+	text-align:center;
+}
+
+#ovinho{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:20%    
+}
+
+#texto{
+	background: #ffccff;
+	width: 50%;
+	float: left;
+}
+
+#figs{
+	width: 50%;
+	float: left;
+}
+
+#link{
+	clear: left;
+}
+
+#legenda{
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+	font-size: 150%;
+}
