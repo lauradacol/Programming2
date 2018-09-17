@@ -1,0 +1,90 @@
+/********************************************** config. gerais da estrutura da página */
+* {
+  box-sizing: border-box;    
+}
+
+a {
+  text-decoration: none; /* todos os links sem sublinhado */ 
+  color: white;
+}
+
+a:hover{
+	background: #669999;
+}
+
+body {
+  font-family: "Kosugi Maru", sans-serif;
+  margin: 0;
+}
+
+/********************************************** Área Superior */
+header{
+	background: #004080;
+	color: white;
+	position: relative;
+}
+
+#rent{
+	position: absolute;
+	right: 15px;
+	bottom: 0px;
+}
+
+nav{
+	width: 100%;
+}
+
+.menu ul li{
+	display: inline;
+	font-size: 1em;
+	text-transform: uppercase;   
+	padding:10px;	            
+}  
+/********************************************** Área do meio */
+main{
+	background: #47c747;
+	width: 80%;
+	float: left;
+	position: relative;	
+}
+
+aside{
+	background: #3399ff;
+	width: 20%;
+	float: left;	
+	position: relative;
+}
+
+/*Os itens na área aside devem aparecer sem o marcados e com fundo colorido (cada item dentro de um "retângulo"*/
+
+aside ul li{
+	list-style-type: none;
+	padding: 8px;
+	margin-bottom: 8px;	
+	background: #004080;
+	color: white;
+	box-shadow: 3px 3px 5px rgba(0, 0, 0, 1);	
+	position: relative;
+	right: 15px;
+}
+
+section{
+	background: #3399ff;
+	width: 100%;
+	clear: left;
+}
+
+#total{
+	position: absolute;
+	right: 10px;
+	bottom: 10px;	
+	font-size: 2em;
+	color: red;
+	font-weight: bold;
+}
+
+/********************************************** Rodapé */
+footer{
+	background: #004080;
+	width: 100%
+}

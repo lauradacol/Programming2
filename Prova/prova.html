@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<meta name="description" content="Aqui você encontra ferramentas para aluguél">
+	<meta name="keywords" content="Ferramentas, aluguél">	
+	
+	<link rel="stylesheet" type="text/css" href="prova.css">
+	<link href="https://fonts.googleapis.com/css?family=Kosugi+Maru" rel="stylesheet">
+	
+	<title>Rent a Tool - Aluguél de Ferramentas</title>
+</head>
+<body>
+	<!-- cabeçalho -->
+	<header>
+		<h1 id="adm">Administração do Site</h1>
+		<h2 id="rent">Rent a Tool - Aluguél de Ferramentas</h2>
+		
+		<nav class="menu">    
+			<ul>
+				<li><a href="prova.html">Página Inicial</a></li>
+				<li><a href="prova.html">Produtos</a></li>
+				<li><a href="prova.html">Clientes</a></li>
+				<li><a href="prova.html">Pedidos</a></li>
+				<li><a href="prova.html">Log off</a></li>
+			</ul>
+		</nav>
+	</header>
+	<!-- fim cabeçalho -->
+	
+	<!-- formulário-->
+	<main>	
+		<h2>Cadastro de Produtos:</h2>
+		
+		<form action="" method="get">			
+			<fieldset>
+				<legend>Dados do Produto:</legend>
+				<div>
+					<label for="nome">Nome: </label>
+					<input type="text" name="nome" id="nome" size="50" required autofocus>			
+				</div>
+
+				<div>
+					<label for="fabricante">Fabricante:</label>
+						<select name="fabricante" id="fabricante">
+							<option value="0">Não informado</option>
+							<option value="1">Bosch</option>
+							<option value="2">Makita</option>
+							<option value="3">Trapp</option>					
+							<option value="3">De Waltt</option>					
+						</select>					
+				</div>		
+
+				<div>
+					<label for="imagem">Imagem:</label>
+					<input type="file" name="imagem" size="30" id="imagem">
+				</div>								
+			
+				<div>
+					<label for="descricao">Descrição:</label>
+						<textarea name="descricao" id="descricao" rows="5" cols="30"></textarea>			
+				</div>
+				
+				<div>
+					<p>Voltagem:</p>				
+						<label><input type="radio" name="voltagem" value="110v">110V</label><br>			
+						<label><input type="radio" name="voltagem" value="220v">220V</label><br>
+						<label><input type="radio" name="voltagem" value="naoseaplica">Não se aplica</label><br>			
+				</div>
+			
+				<div>
+					<p>Categoria(s):</p>	
+					<label><input type="checkbox" name="categoria[]" value="marcenaria">Marcenaria</label>
+					<label><input type="checkbox" name="categoria[]" value="jardinagem">Jardinagem</label>
+					<label><input type="checkbox" name="categoria[]" value="limpeza">Limpeza</label>
+					<label><input type="checkbox" name="categoria[]" value="escritorio">Escritório</label>
+					<label><input type="checkbox" name="categoria[]" value="Mecânica">Mecânica</label>															
+					<label><input type="checkbox" name="categoria[]" value="outros" checked>Outros</label>
+				</div>	
+			
+			</fieldset>
+			
+			<fieldset>
+				<legend>Dados da Locação:</legend>			
+		
+				<div>
+					<label for="quantidade">Quantidade disponível:</label><br>
+					<input type="number" name="quantidade" min="1" id="quantidade"><br>
+				</div>
+
+				<div>
+					<label for="valor">Valor da Locação:</label><br>		
+					<input type="text" name="valor" size="20" id="valor" placeholder="0.00"><br>				
+				</div>
+
+				<div>
+					<label for="valor">Desconto Promocional:</label><br>		
+					<input type="text" name="desc" size="20" id="desc" placeholder="0.00"><br>				
+				</div>
+				
+				<p>TOTAL: </p>
+				<div id="total">
+					<p>0.00</p>
+				</div>				
+		
+			</fieldset>
+
+			<div>
+				<input type="submit" value="Cadastrar">
+				<input type="reset" value="Limpar">
+			</div>
+			
+		</form>
+	</main>
+	<!--fim de formulário-->
+		
+	<aside>
+		<ul>
+			<li>Total de produtos: 150</li>
+			<li>Locados: 99</li>
+			<li>Disponíveis: 51</li>			
+		</ul>		
+	</aside>
+	
+	<section>
+		<h3>Últimos produtos cadastrados</h3>
+		<table>
+			<tr>
+				<th>Nome</th>
+				<th>Fabricante</th>
+				<th>Valor da Locação</th>
+			</tr>
+			<tr>
+				<td>Serra Elétrica</td>
+				<td>Maquita</td>
+				<td>R$ 30,00</td>			
+			</tr>
+			<tr>
+				<td>Roçadeira</td>
+				<td>Bosch</td>
+				<td>R$ 60,00</td>			
+			</tr>
+			<tr>
+				<td>Serra Elétrica</td>
+				<td>Trapp</td>
+				<td>R$ 30,00</td>			
+			</tr>					
+				
+			</table>
+	</section>
+	
+	<footer>
+		<p>Último acesso em: 17/09/2018</p>
+	</footer>
+	
+</body>
+</html>
