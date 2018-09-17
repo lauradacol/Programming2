@@ -46,6 +46,7 @@ main{
 	width: 80%;
 	float: left;
 	position: relative;	
+	padding: 10px;
 }
 
 aside{
@@ -72,12 +73,10 @@ section{
 	background: #3399ff;
 	width: 100%;
 	clear: left;
+	padding: 10px;
 }
 
 #total{
-	position: absolute;
-	right: 10px;
-	bottom: 10px;	
 	font-size: 2em;
 	color: red;
 	font-weight: bold;
@@ -88,3 +87,34 @@ footer{
 	background: #004080;
 	width: 100%
 }
+
+/********************************************** Regras do Formulário*/
+input[type="text"], input[type="email"], select, textarea{
+	border: 2px #004080;
+	margin: 10px 0px;
+	border-radius: 5px;
+	padding: 5px 20px;
+	background-color: #fff;
+	color: #004080;
+	font-family: monospace;
+}
+
+input[type="submit"], input[type="reset"]{
+	background-color: #004080;
+	color: 507913;
+	width: 200px;
+	height: 40px;
+	font-weight: bold;
+	border: 15;
+}
+
+input[type="text"]:focus, select:focus, textarea:focus{
+	background-color: #004080;
+	font-weight: bold;
+	color: white;
+}
+
+
+
+
+
