@@ -91,18 +91,16 @@
 
 				<div>
 					<label for="valor">Valor da Locação:</label><br>		
-					<input type="text" name="valor" size="20" id="valor" placeholder="0.00"><br>				
+					<input type="text" name="valor" size="20" id="valor" placeholder="0.00" onchange="changeValor()"><br>				
 				</div>
 
 				<div>
 					<label for="desc">Desconto Promocional:</label><br>		
-					<input type="text" name="desc" size="20" id="desc" placeholder="0.00"><br>				
+					<input type="text" name="desc" size="20" id="desc" placeholder="0.00" onchange="changeDesc()"><br>				
 				</div>
 				
 				<p>TOTAL: </p>
-				<div id="total">
-					<p>0.00</p>
-				</div>				
+				<p id="total">0.00</p>								
 		
 			</fieldset>
 
@@ -153,6 +151,8 @@
 	<footer>
 		<p>Último acesso em: 17/09/2018</p>
 	</footer>
+	
+	<script src="prova.js"></script>
 
 </body>
 </html>
