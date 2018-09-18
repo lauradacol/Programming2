@@ -7,109 +7,122 @@ body{
 
 a{
 	text-decoration: none;	
+	color: #fff;
 }
 
 a:hover {
   text-shadow: 2px 2px 2px #000;
 }
 
-a:active {
-  color: #fff;
-}
-
 /********************************************** área superior */
 header{
-	background-color: #cc0099;
+	background-color: #d64161;
 	padding: 10px;
 	position: relative;
 }
 
-nav{
-	background-color: #b390b3;
-	padding: 10px;
+h1{
+	color: white;
 }
 
-.menu{
-	list-style-type: none;	
+nav ul{
+	background-color: #d64161;
+	margin: 0;
+	padding: 0;
 }
+
+.menu li{
+	background-color: #6b5b95;
+	list-style-type: none;
+	padding: 8px;
+	margin-bottom: 8px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.50);
+}
+
+.logout {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  text-align: center;
+}
+
+/*********************************************** main (texto e figuras) */
+main{
+	background-color: #eea29a;
+	margin: 10px;
+}
+
+/*********************************************** texto*/
+
+.p1{
+	padding: 5px;
+	text-align: justify;
+	font-size: 150%;
+}
+
+#texto{
+	background: pink;
+	/*width: 50%;*/
+}
+
+/*********************************************** figuras */
+div.foto{
+  width: 300px;
+  height: 300px;
+  margin: 10px;
+  background-color: white;
+  text-align: center;
+  float: left;
+}
+
+div.foto img{
+  width: 150px;
+  transition: 0.5s;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;  
+}
+
+div.foto:hover {
+  box-shadow: 2px 2px 5px #333;
+  transition: 0.5s;
+}
+
+aside .figs{
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-around; 
+  padding-bottom: 20px;
+}
+
+aside .foto {
+  transform: scale(0.7);
+  width: 150px;
+  height: 150px;
+}
+
+.legenda{
+	display: block;
+}
+
+/************************************************ rodape */
+footer{
+	background-color: #6b5b95;
+	padding: 10px;
+	clear: left;
+}
+
+
+
+
+/*QUERIES
+ * 
 
 .menu li{
 	display: inline;
 	margin: 10px;
 }
 
-/*
-.p1{
-	padding: 5px;
-	text-align: justify;
-	font-size: 150%;
-	float: left;
-}
-	
 
-
-main{
-	background-color: #ffccff;
-	margin: 10px;
-}
-
-footer{
-	background-color: #b390b3;
-	padding: 10px;
-	clear: left;
-}
-
-.figs_desc{
-	float: right;
-	width: 50%;
-}
-
-figure{
-	float: left;
-	width: 150px;	
-}
-
-
-figure img{
-	width: 60%;
-	height: 60%;
-}
-
-figure img:hover, #ovinho:hover{
-	box-shadow: 15px 15px 50px pink;
-	transform: scale(3);
-	transition: 0.7s;
-}
-
-figcaption{
-	text-align:center;
-}
-
-#ovinho{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width:20%    
-}
-
-#texto{
-	background: #ffccff;
-	width: 50%;
-	float: left;
-}
-
-#figs{
-	width: 50%;
-	float: left;
-}
-
-#link{
-	clear: left;
-}
-
-#legenda{
-	position: absolute;
-	right: 5px;
-	bottom: 5px;
-	font-size: 150%;
-}
+ * 
+ * */
