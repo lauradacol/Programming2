@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<meta name="description" content="Gerenciamento da CHUFSC">
+	<meta name="keywords" content="Coleção biológica, museu">	
+	
+<!--	<link rel="stylesheet" type="text/css" href="css/colecao.css"> -->
+
+	<title id="inicio">CHUFSC</title>
+</head>
+<body>
+	<!-- cabeçalho -->
+	<header>
+		<h1 id="adm">CHUFSC - Coleção Herpetológica da UFSC - INICIO</h1>
+		<h2 id="rent">Gerenciamento da Coleção</h2>
+		<p class="logout"><a href="#"><img src="images/gerais/logout.png" width="32"><br>Logout</a></p>
+
+		<!-- Menu-->
+		<nav class="menu">    
+			<ul>
+				<li><a href="#familia">Inserir Família</a></li>
+				<li><a href="#genero">Inserir Gênero</a></li>
+				<li><a href="#especie">Inserir Espécie</a></li>				
+				<li><a href="#localidade">Inserir Localidade</a></li>
+				<li><a href="#coordenadas">Inserir Coordenada</a></li>	
+				<li><a href="#coletor">Inserir Coletor</a></li>									
+				<li><a href="#tecido">Inserir Tecido</a></li>	
+				<li><a href="#individuo">Inserir Individuo</a></li>							
+				<li><a href="#tombo">Consultar Livro Tombo</a></li>
+			</ul>
+		</nav>
+				
+	</header>
+	
+	<section id="familia">
+		<fieldset>
+			<legend>Inserir Família:</legend>
+			<div>
+				<label for="nomefam">Nome da Família: </label>
+				<input type="text" name="nomefam" id="nomefam" size="50" required autofocus>			
+			</div>	
+			<div>
+				<input type="submit" value="Inserir" onclick="isEmpty()">
+				<input type="reset" value="Limpar">
+			</div>				
+		</fieldset>	
+	</section>
+
+	<section id="genero">
+		<fieldset>
+			<legend>Inserir Gênero:</legend>
+			<div>
+				<label for="nomefam">Família:</label>
+					<select name="nomefam">
+						<option value="0">Colubridae</option>
+						<option value="1">Viperidae</option>
+						<option value="2">Elapidae</option>
+						<option value="3">Boidae</option>					
+					</select>					
+			</div>
+			
+			<div>
+				<label for="nomegen">Nome do Gênero: </label>
+				<input type="text" name="nomegen" id="nomegen" size="50" required autofocus>			
+			</div>	
+			<div>
+				<input type="submit" value="Inserir" onclick="isEmpty()">
+				<input type="reset" value="Limpar">
+			</div>				
+		</fieldset>		
+	</section>	
+	
+	<section id="especie">
+		<fieldset>
+			<legend>Inserir Espécie:</legend>
+			<div>
+				<label for="nomegen">Gênero:</label>
+					<select name="nomegen">
+						<option value="0">Liophis</option>
+						<option value="1">Bothrops</option>
+						<option value="2">Micrurus</option>
+						<option value="3">Boa</option>					
+					</select>					
+			</div>
+			
+			<div>
+				<label for="nomeesp">Epítoto específico: </label>
+				<input type="text" name="nomeesp" id="nomeesp" size="50" required autofocus>			
+			</div>	
+			<div>
+				<input type="submit" value="Inserir" onclick="isEmpty()">
+				<input type="reset" value="Limpar">
+			</div>				
+		</fieldset>		
+	</section>		
+
+	<section id="localidade">
+		<fieldset>
+			<legend>Inserir Localidade:</legend>			
+			<div>
+				<label for="municipio">Município: </label>
+				<input type="text" name="municipio" id="municipio" size="50" required autofocus>			
+			</div>
+
+			<div>
+				<label for="uf">Unidade Federativa: </label>
+				<input type="text" name="uf" id="uf" size="50" required>			
+			</div>
+			
+			<div>
+				<label for="localidade">Localidade: </label>
+				<input type="text" name="localidade" id="localidade" size="50" required>			
+			</div>
+				
+			<div>
+				<input type="submit" value="Inserir" onclick="isEmpty()">
+				<input type="reset" value="Limpar">
+			</div>				
+		</fieldset>		
+	</section>	
+
+	<section id="coordenadas">
+		<fieldset>
+			<legend>Inserir Coordenada:</legend>			
+			<div>
+				<label for="x">Coordenada x: </label>
+				<input type="text" name="x" id="x" size="50" required autofocus>			
+			</div>
+
+			<div>
+				<label for="x">Coordenada y: </label>
+				<input type="text" name="y" id="y" size="50" required >			
+			</div>
+			
+			<div>
+				<label for="unidade">Unidade:</label>
+				<input type="text" name="unidade" id="unidade" required>				
+			</div>			
+			
+			<div>
+				<label for="datum">Datum:</label>
+				<input type="text" name="datum" id="datum" required>				
+			</div>							
+			
+			<div>
+				<input type="submit" value="Inserir" onclick="isEmpty()">
+				<input type="reset" value="Limpar">
+			</div>				
+		</fieldset>		
+	</section>	
+
+	<section id="coletor">
+		<fieldset>
+			<legend>Inserir Coletor:</legend>			
+			<div>
+				<label for="nomecol">Nome do Coletor: </label>
+				<input type="text" name="nomecol" id="nomecol" size="50" required autofocus>			
+			</div>
+
+			<div>
+				<label for="email">E-mail: </label>
+				<input type="email" name="email" id="email" placeholder="exemplo@exemplo.com" required>				
+			</div>
+			
+			<div>
+				<label for="telefone">Telefone: </label>
+				<input type="text" name="telefone" id="telefone" placeholder="(xx)xxxxx-xxxx">				
+			</div>			
+			
+			<div>
+				<input type="submit" value="Inserir" onclick="isEmpty()">
+				<input type="reset" value="Limpar">
+			</div>				
+		</fieldset>		
+	</section>		
+	
+	<section id="tecido">
+		<fieldset>
+			<legend>Inserir Tecido</legend>			
+			<div>
+				<label for="tombotec">Número Tombo:</label>
+					<select name="nomegen">
+						<option value="0">001</option>
+						<option value="1">002</option>
+						<option value="2">003</option>
+						<option value="3">004</option>					
+					</select>					
+			</div>
+			
+			<div>
+				<label for="localtec">Localização: </label>
+				<input type="text" name="localtec" id="localtec" size="50" required autofocus>			
+			</div>			
+			
+			<div>
+				<label for="tipotec">Tipo de Tecido: </label>
+				<input type="text" name="tipotec" id="tipotec" size="50" required>			
+			</div>					
+		</fieldset>		
+	</section>		
+
+	<section id="individuo">
+		<fieldset>
+			<legend>Inserir Indivíduo</legend>		
+			<p>Número tombo:</p>
+			<p id="numerotombo">001</p>
+				
+			<div>
+				<label for="nomefam">Família:</label>
+					<select name="nomefam">
+						<option value="0">Colubridae</option>
+						<option value="1">Viperidae</option>
+						<option value="2">Elapidae</option>
+						<option value="3">Boidae</option>					
+					</select>					
+			</div>	
+
+			<div>
+				<label for="nomegen">Gênero:</label>
+					<select name="nomegen">
+						<option value="0">Liophis</option>
+						<option value="1">Bothrops</option>
+						<option value="2">Micrurus</option>
+						<option value="3">Boa</option>					
+					</select>					
+			</div>
+
+			<div>
+				<label for="nomegen">Espécie:</label>
+					<select name="nomegen">
+						<option value="0">miliaris</option>
+						<option value="1">jararaca</option>
+						<option value="2">coralinus</option>
+						<option value="3">constrictor</option>					
+					</select>					
+			</div>	
+			
+			<div>
+				<label for="localidade">Localidade:</label>
+					<select name="nomegen">
+						<option value="0">UFFS</option>
+						<option value="1">Ecoparque</option>
+						<option value="2">Verdão</option>
+					</select>					
+			</div>				
+			
+			<div>
+				<label for="coordenada">ID da Coordenada:</label>
+					<select name="nomegen">
+						<option value="0">01</option>
+						<option value="1">02</option>
+						<option value="2">03</option>
+						<option value="3">04</option>					
+					</select>					
+			</div>				
+
+			<div>
+				<label for="coletor">Coletor:</label>
+					<select name="nomegen">
+						<option value="0">Laura Dacol</option>
+						<option value="1">José da Silva</option>
+						<option value="2">Maria Souza</option>		
+					</select>					
+			</div>	
+	
+			<div>
+				<label for="date">Data de Coleta:</label> 
+				<input id="date" type="date" name="date" id="date" required>			
+			</div>	
+	
+			<div>
+				<label for="vidro">Vidro de Armazenamento: </label>
+				<input type="text" name="vidro" id="vidro" size="50" required>			
+			</div>	
+			
+			<div>
+				<label for="obs">Observações: </label>
+				<textarea name="msg" rows="10" cols="60"></textarea>			
+			</div>				
+			
+
+					
+		</fieldset>		
+	</section>		
+
+	<section id="tombo">
+	
+		<h3>Livro Tombo</h3>
+		<table>
+			<tr>
+				<th>Família</th>
+				<th>Gênero</th>
+				<th>Espécie</th>
+				<th>Localidade</th>
+				<th>Coordenadas</th>
+				<th>Coletor</th>
+				<th>Tecido</th>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>	
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>			
+			</tr>
+			
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>	
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>			
+			</tr>			
+		</table>
+	</section>
+	
+	
+	<footer>
+		<p>Último acesso em: </p>
+		<a href="#inicio">Início da Página</a>
+	</footer>
+	
+	<script src="prova.js"></script>
+
+</body>
+</html>
