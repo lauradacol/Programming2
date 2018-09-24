@@ -1,0 +1,22 @@
+NOME: LAURA HELENA BENTO DACOL
+DOMÍNIO: www.chufsc.com.br
+
+Este é um projeto para uma aplicação de gerenciamento da Coleção Herpetológica da UFSC (CHUFSC). Uma Coleção Científica tem como função armazenar e preservar um acervo de espécimes da fauna. 
+O objetivo da aplicação é permitir o cadastro e a busca de indivíduos tombandos na coleção científica. 
+
+INFORMAÇÕES DO INDIVÍDUO:
+Basicamente, armazenam-se indivíduos (espécimes). Cada indivíduo possui um número tombo, que é único. Além disso deve-se obrigatóriamente armazenar: 
+- A data em que esse indivíduo foi coletado em campo.
+- A localidade, município e estado onde o indivíduo foi coletado (por exemplo: SC, Chapecó, Ecoparque). Uma localidade cadastrada no banco pode possuir vários indivíduos associados à ela, mas um indivíduo possui apenas uma localidade. 
+- O vidro em que este indivíduo está alocado na coleção, sendo que um vidro pode conter vários indivíduos, mas um indivíduo está em um único vidro. 
+- Informações do coletor: nome, email, telefone. Um coletor pode ter coletado vários indivíduos e um indivíduo pode estar associado à mais de um coletor pois há casos em que duas pessoas coletaram um indivíduo e gostariam de ter seu nome associado à ele. 
+- Se foi coletado tecido biológico ou não deste indivíduo (é um campo obrigatório, para preencher sim ou não).
+- Caso tenha sido coletado tecido biológico, deve ser informado o local em que esse tecido está na coleção (normalmente armazenam-se em freezer, cujos recipientes possuem números) e o tipo de tecido (músculo, fígado, etc.). Uma amostra de tecido pertence à um único indivíduo, mas um indivíduo pode ter várias amostras de tecido. 
+
+Além das informações obrigatórias citadas acima, é importante ter um local para armazenar as coordenadas geográficas do indivíduo (x e y, datum e unidade) e eventuais observações. Porém, estas informações são opcionais. 
+
+FAMÍLIA, GÊNERO E ESPÉCIE*:
+Ainda, deve-se associar ao indivíduo a sua identificação biológica. No presente banco de dados, vamos optar por armazenar apenas família, gênero e espécie. A hierarquia é a seguinte: uma família pode ter vários gêneros e um gênero pode ter várias espécies. Exemplo: A espécie humana pertence à Familia Hominidae, ao gênero Homo e à espécie sapiens. É importante ressaltar que a identificação não é um campo obrigatório, pois nem sempre ela é possível.
+
+* Na verdade, a espécie é Homo sapiens. Homo é o gênero e sapiens é o epítoto específico. Optou-se por simplificar,  chamando o epítoto específico de espécie, para dar fluidez ao texto.
+
