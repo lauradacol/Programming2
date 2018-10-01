@@ -64,6 +64,10 @@ header h1 {
 }
 
 /******************************************************************** menu superior */
+.menu-opcoes {
+	display: none;
+}
+
 .menu-opcoes ul {
   font-size: 1em;
   text-transform: uppercase;
@@ -91,10 +95,6 @@ h2 {
 }
 
 /***************************************************************************** menu categorias */
-.menu-opcoes{
-	display: none;
-}
-
 .menu-categorias {
   background-color: #F5CF8E; 
   border-radius: 10px;    
@@ -158,9 +158,12 @@ div.produto a{
 }
 
 div.produto .preco{
+  display: block;	
+}
+
+div.produto .precoFinal{
   font-weight: bold;
   color: red;
-  display: block;
 }
 
 div.produto img{
@@ -208,10 +211,11 @@ footer {
   display: inline;
 }
 
-/********************************************************************************* div ajuda **/
+/*************************************************** div ajuda */
+
 #ajuda{
 	width: 200px;
-	height: 200px;
+	height: 100px;
 	background-color: lightgreen;
 	color: black;
 	padding: 5px;
@@ -259,22 +263,22 @@ footer {
    /* .col-1 {flex: 20%;}
     .col-2 {flex: 60%;}
     .col-3 {flex: 20%;}*/
-        
+  
     .menu-opcoes {
         position: absolute;
         bottom: 0;
         right: 10px;
-        display: block;
+        display: initial;
         /* para layout flexbox, substituir as 3 linhas acima pela abaixo */
         /*align-self: flex-end;*/
     }   
         
     .menu-opcoes ul li{
         display: inline; /* menu superior se torna horizontal */
-    }           
-    
-    #exibeMenu{
-		display: none;
-    } 
-}  
+    }   
 
+    #exibeMenu{
+    	display: none;
+    }
+
+}  
