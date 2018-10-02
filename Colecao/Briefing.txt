@@ -1,5 +1,6 @@
 NOME: LAURA HELENA BENTO DACOL
-DOMÍNIO: www.chufsc.com.br
+DOMÍNIO: https://chufsc.000webhostapp.com/
+Hospedado em: https://www.000webhost.com
 
 Este é um projeto para uma aplicação de gerenciamento da Coleção Herpetológica da UFSC (CHUFSC). Uma Coleção Científica tem como função armazenar e preservar um acervo de espécimes da fauna. 
 O objetivo da aplicação é permitir o cadastro e a busca de indivíduos tombandos na coleção científica. 

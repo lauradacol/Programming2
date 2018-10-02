@@ -16,7 +16,7 @@
 	<header>
 		<h1 id="inicio">CHUFSC - Coleção Herpetológica da UFSC</h1>
 		<h2>Gerenciamento da Coleção</h2>
-		<p class="logout"><a href="#"><img src="imagens/gerais/logout.png" width="32" alt="ícone de logout"><br>Logout</a></p>
+		<p class="logout"><a href="#"><img src="imagens/logout.png" width="32" alt="ícone de logout"><br>Logout</a></p>
 
 		<!-- Menu-->
 		<nav class="menu">    
@@ -36,93 +36,97 @@
 	</header>
 	
 	<main>
+		<!--INSERIR INDIVÍDUO-->
+		<form>
+			<section id="individuo">
+				<fieldset>
+					<legend>Inserir Indivíduo</legend>		
+					
+					<p id="numerotombo">1</p>				
+										
+					<div>
+						<label for="nome_fam" class="form-alinhado">Família:</label>
+							<select name="nome_fam">
+								<option value="0">Colubridae</option>
+								<option value="1">Viperidae</option>
+								<option value="2">Elapidae</option>
+								<option value="3">Boidae</option>					
+							</select>					
+					</div>	
 
-		<section id="individuo">
-			<fieldset>
-				<legend>Inserir Indivíduo</legend>		
-				
-				<p id="numerotombo">1</p>				
-									
-				<div>
-					<label for="nomefam" class="form-alinhado">Família:</label>
-						<select name="nomefam">
-							<option value="0">Colubridae</option>
-							<option value="1">Viperidae</option>
-							<option value="2">Elapidae</option>
-							<option value="3">Boidae</option>					
-						</select>					
-				</div>	
+					<div>
+						<label for="nomegen" class="form-alinhado">Gênero:</label>
+							<select name="nomegen">
+								<option value="0">Liophis</option>
+								<option value="1">Bothrops</option>
+								<option value="2">Micrurus</option>
+								<option value="3">Boa</option>					
+							</select>					
+					</div>
 
-				<div>
-					<label for="nomegen" class="form-alinhado">Gênero:</label>
-						<select name="nomegen">
-							<option value="0">Liophis</option>
-							<option value="1">Bothrops</option>
-							<option value="2">Micrurus</option>
-							<option value="3">Boa</option>					
-						</select>					
-				</div>
+					<div>
+						<label for="nomegen" class="form-alinhado">Espécie:</label>
+							<select name="nomegen">
+								<option value="0">miliaris</option>
+								<option value="1">jararaca</option>
+								<option value="2">coralinus</option>
+								<option value="3">constrictor</option>					
+							</select>					
+					</div>	
+					
+					<div>
+						<label for="localidade" class="form-alinhado">Localidade:</label>
+							<select name="nomegen">
+								<option value="0">UFFS</option>
+								<option value="1">Ecoparque</option>
+								<option value="2">Verdão</option>
+							</select>					
+					</div>				
+					
+					<div>
+						<label for="coordenada" class="form-alinhado">ID da Coordenada:</label>
+							<select name="nomegen">
+								<option value="0">01</option>
+								<option value="1">02</option>
+								<option value="2">03</option>
+								<option value="3">04</option>					
+							</select>					
+					</div>				
 
-				<div>
-					<label for="nomegen" class="form-alinhado">Espécie:</label>
-						<select name="nomegen">
-							<option value="0">miliaris</option>
-							<option value="1">jararaca</option>
-							<option value="2">coralinus</option>
-							<option value="3">constrictor</option>					
-						</select>					
-				</div>	
-				
-				<div>
-					<label for="localidade" class="form-alinhado">Localidade:</label>
-						<select name="nomegen">
-							<option value="0">UFFS</option>
-							<option value="1">Ecoparque</option>
-							<option value="2">Verdão</option>
-						</select>					
-				</div>				
-				
-				<div>
-					<label for="coordenada" class="form-alinhado">ID da Coordenada:</label>
-						<select name="nomegen">
-							<option value="0">01</option>
-							<option value="1">02</option>
-							<option value="2">03</option>
-							<option value="3">04</option>					
-						</select>					
-				</div>				
+					<div>
+						<label for="coletor" class="form-alinhado">Coletor:</label>
+							<select name="nomegen">
+								<option value="0">Laura Dacol</option>
+								<option value="1">José da Silva</option>
+								<option value="2">Maria Souza</option>		
+							</select>					
+					</div>	
+			
+					<div>
+						<label for="date" class="form-alinhado">Data de Coleta:</label> 
+						<input id="date" type="date" name="date" required>			
+					</div>	
+			
+					<div>
+						<label for="vidro" class="form-alinhado">Vidro de Armazenamento: </label>
+						<input type="text" name="vidro" id="vidro" maxlength="10" required>			
+					</div>	
+					
+					<div>
+						<label for="obs" class="form-alinhado">Observações: </label>
+						<textarea name="msg" maxlength="50"></textarea>			
+					</div>				
+					
+					<div>
+						<input type="submit" value="Inserir" onclick="updateTombo()">
+						<input type="reset" value="Limpar">
+					</div>		
+							
+				</fieldset>		
+			</section>		
+		</form>			
+<!--INSERIR FAMILIA-->
 
-				<div>
-					<label for="coletor" class="form-alinhado">Coletor:</label>
-						<select name="nomegen">
-							<option value="0">Laura Dacol</option>
-							<option value="1">José da Silva</option>
-							<option value="2">Maria Souza</option>		
-						</select>					
-				</div>	
-		
-				<div>
-					<label for="date" class="form-alinhado">Data de Coleta:</label> 
-					<input id="date" type="date" name="date" required>			
-				</div>	
-		
-				<div>
-					<label for="vidro" class="form-alinhado">Vidro de Armazenamento: </label>
-					<input type="text" name="vidro" id="vidro" maxlength="10" required>			
-				</div>	
-				
-				<div>
-					<label for="obs" class="form-alinhado">Observações: </label>
-					<textarea name="msg" maxlength="50"></textarea>			
-				</div>				
-				
-				<div>
-					<input type="submit" value="Inserir" onclick="updateTombo()">
-					<input type="reset" value="Limpar">
-				</div>		
-						
-			</fieldset>		
-		</section>				
 		
 		<section id="familia">
 			<fieldset>
@@ -302,7 +306,7 @@
 
 		<legend>Livro Tombo:</legend>
 		<div id="tabelatombo">
-			<table>
+			<table id="tabelatombo2">
 				<tr>
 					<th>Nº Tombo</th>
 					<th>Família</th>
@@ -313,6 +317,21 @@
 					<th>Coletor</th>
 					<th>Tecido</th>
 				</tr>
+				
+				<tr id="teste">
+					<td id = "tab_tombo"></td>
+					<td id = "tab_fam"></td>
+					<td id = "tab_gen"></td>
+					<td id = "tab_sp"></td>
+					<td id = "tab_loc"></td>
+					<td id = "tab_coo"></td>
+					<td id = "tab_col"></td>
+					<td id = "tab_tec"></td>																								
+				</tr>
+				
+				
+<!--				
+				
 				<tr>
 					<td>001</td>
 					<td>Colubridae</td>
@@ -692,14 +711,14 @@
 					<td>02</td>
 					<td>José da Silva</td>
 					<td>Não</td>							
-				</tr>					
+				</tr>	-->				
 			</table>		
 		</div>
 												
 	</fieldset>	
 		
 	<footer>
-		<a href="#inicio">Início da Página</a>
+		<a href="#inicio">Início da Página</a>		
 	</footer>
 	
 	<script src="js/colecao.js"></script>
