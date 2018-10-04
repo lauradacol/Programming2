@@ -1,3 +1,37 @@
+<?php
+include "../includes/conexao.php";
+if(isset($_POST['cadastrar'])){
+	//botao cadastrar foi acionado, podemos inserir os dados
+	$nome = $_POST['nome'];
+	$fabricante = $_POST['fabricante'];
+	$imagem = 'NULL'; //sera alterado depois
+	$descricao = $_POST['descricao'];
+	$tensao = $_POST['tensao'];
+	$catMarcenaria = isset($_POST['marcenaria'])? 1 : 0;
+	$catJardinagem = isset($_POST['jardinagem'])? 1 : 0; 
+	$catLimpeza = isset($_POST['limpeza'])? 1 : 0; 
+	$catEscritorio = isset($_POST['escritorio'])? 1 : 0; 
+	$catMecanica = isset($_POST['mecanica'])? 1 : 0;
+	$catOutros = isset($_POST['outros'])? 1 : 0;
+	$quantidade = $_POST['quantidade'];
+	$valor = $_POST['valor'];
+	$desconto = $_POST['desconto'];
+	
+	$sql = "INSERT INTO produto (nome, idFabricante, imagem, descricao, tensao, catMarcenaria, catJardinagem, catLimpeza, catEscritorio, catMecanica, catOutros, qtde, valor, desconto) VALUES ('$nome', $fabricante, $imagem, '$descricao', $tensao, $catMarcenaria, $catJardinagem, $catLimpeza, $catEscritorio, $catMecanica, $catOutros, $quantidade, $valor, $desconto)";
+	
+	$resultado = mysqli_query($conexao, $sql);
+	
+	if($resultado){
+		$mensagem = "O produto <strong>$nome</strong> foi inserido com sucesso!";
+	}
+	else{
+		$mensagem = "Erro. O produto não pode ser cadastrado!. ";
+		$mensagem .= mysqli_error($conexao); //para debug
+	}		
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -38,6 +72,13 @@
 		<div class="container">
 			<main>
 				<h2>Cadastro de Produtos</h2>
+				<?php
+					if(isset($mensagem)){
+						echo "<p>$mensagem</p>";
+					}
+					else{ //carrega form
+				?>				
+				
 				<form action="" method="post" id="form-cadastro">
 					<div>
 						<fieldset>
@@ -50,11 +91,14 @@
 							<div class="form-item">
 								<label for="fabricante" class="label-alinhado">Fabricante:</label>
 									<select name="fabricante" id="fabricante">
-										<option value="">Selecione o fabricante</option>
-										<option>Bosch</option>
-										<option>Makita</option>
-										<option>Trapp</option>
-										<option>De Waltt</option>
+										<option value="">Não informado</option>
+										<?php										
+											$sql = "select * from fabricante order by nome";
+											$resultado = mysqli_query($conexao,$sql);
+											while ($registro = mysqli_fetch_array($resultado)){
+												echo "<option value ='{$registro['id']}'>{$registro['nome']}</option>";											
+											}										
+										?>					
 									</select>
 							</div>
 							
@@ -87,7 +131,7 @@
 							<legend><strong>Dados da locação</strong></legend>
 							<div class="form-item">
 								<label for="qntDis" class="label-alinhado">Quantidade Disponível:</label>
-								<input type="number" id="quantidade" name="qiantidade" value="1" min="1">
+								<input type="number" id="quantidade" name="quantidade" value="1" min="1">
 							</div>
 							<div class="form-item">
 								<label for="valor" class="label-alinhado">Valor da locação:</label>
@@ -110,6 +154,11 @@
 						</fieldset>
 					</div>
 				</form>
+				
+				<?php 
+				} //fecha else
+				?>
+				
 			</main>	
 			<aside>
 				<ul class='itens'>
