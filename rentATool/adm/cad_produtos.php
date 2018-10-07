@@ -101,7 +101,7 @@ if(isset($_POST['cadastrar'])){
 										?>					
 									</select>
 							</div>
-							
+
 							<div class="form-item">
 								<label for="arquivo" class="label-alinhado">Selecione uma imagem:</label>
 								<input type="file" name="arquivo" id="arquivo">
@@ -154,6 +154,7 @@ if(isset($_POST['cadastrar'])){
 						</fieldset>
 					</div>
 				</form>
+				
 				
 				<?php 
 				} //fecha else

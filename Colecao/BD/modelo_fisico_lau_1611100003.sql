@@ -1,5 +1,16 @@
+DROP DATABASE IF EXISTS chufsc;
+CREATE DATABASE chufsc DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+USE chufsc;
+
+DROP USER IF EXISTS 'admrent'@'localhost';
+
+CREATE USER 'admrent'@'localhost' IDENTIFIED BY '12345'; 
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON chufsc.* TO 'admrent'@'localhost';
+
 CREATE TABLE familia(
-	id_fam INT NOT NULL PRIMARY KEY,
+	id_fam INTEGER AUTO_INCREMENT PRIMARY KEY,
 	nome_fam VARCHAR(50) NOT NULL
 );
 
@@ -11,10 +22,10 @@ insert into familia(id_fam,nome_fam) values (5, 'Typhlopidae');
 
 
 CREATE TABLE genero(
-	id_gen INT NOT NULL PRIMARY KEY,
+	id_gen INTEGER AUTO_INCREMENT PRIMARY KEY,
 	nome_gen VARCHAR(50) NOT NULL,
-	id_fam INT NOT NULL,
-	CONSTRAINT fk_familia_genero FOREIGN KEY(id_fam) REFERENCES familia(id_fam)
+	id_fam INTEGER NOT NULL,
+	FOREIGN KEY (id_fam) REFERENCES familia(id_fam) 	
 );
 
 insert into genero(id_gen,nome_gen, id_fam) values(1, 'Liophis', 1);
@@ -28,10 +39,10 @@ insert into genero(id_gen,nome_gen, id_fam) values(8, 'Leptomicrurus', 3);
 
 
 CREATE TABLE especie(
-	id_sp INT NOT NULL PRIMARY KEY,
-	id_gen INT NOT NULL,
+	id_sp INTEGER AUTO_INCREMENT PRIMARY KEY,
+	id_gen INTEGER NOT NULL,
 	nome_sp VARCHAR(50) NOT NULL,
-	CONSTRAINT fk_genero_especie FOREIGN KEY(id_gen) REFERENCES genero(id_gen)
+	FOREIGN KEY(id_gen) REFERENCES genero(id_gen)
 );
 
 insert into especie(id_sp,id_gen, nome_sp) values(1, 1, 'miliaris');
@@ -53,10 +64,10 @@ insert into especie(id_sp,id_gen, nome_sp) values(16, 8, 'scutiventris');
 
 
 CREATE TABLE sinonimo(
-	id_sp_ant INT NOT NULL REFERENCES especie(id_sp),
-	id_sp_nov INT NOT NULL REFERENCES especie(id_sp),
-	data_modif DATE NOT NULL,
-	CONSTRAINT pk_sinonimo PRIMARY KEY(id_sp_ant, id_sp_nov)
+	id_sin INTEGER AUTO_INCREMENT PRIMARY KEY,
+	id_sp_ant INTEGER NOT NULL REFERENCES especie(id_sp),
+	id_sp_nov INTEGER NOT NULL REFERENCES especie(id_sp),
+	data_modif DATE NOT NULL
 );
 
 insert into sinonimo(id_sp_ant, id_sp_nov, data_modif) values (1,2,'01-01-2016');
@@ -72,7 +83,7 @@ insert into sinonimo(id_sp_ant, id_sp_nov, data_modif) values (14,15,'01-03-2016
 
 
 CREATE TABLE localidade(
-	id_local INT NOT NULL PRIMARY KEY,
+	id_local INTEGER AUTO_INCREMENT PRIMARY KEY,
 	uf VARCHAR(2) NOT NULL,
 	municipio VARCHAR(100) NOT NULL,
 	localidade VARCHAR(200) NOT NULL
@@ -101,7 +112,7 @@ insert into coletor (email, nome_col, tel_col) values ('carolo@gmail.com', 'Caro
 
 
 CREATE TABLE coordenadas(
-	id_coo INT NOT NULL PRIMARY KEY,
+	id_coo INTEGER AUTO_INCREMENT PRIMARY KEY,
 	x VARCHAR(50) NOT NULL,
 	y VARCHAR(50) NOT NULL,
 	unidade VARCHAR(100) NOT NULL,
@@ -116,43 +127,43 @@ insert into coordenadas(id_coo, x, y, unidade, datum) values (4, '-27.291077', '
 insert into coordenadas(id_coo, x, y, unidade, datum) values (5, '-27.211147', '-53.932302', 'grau decimal', 'SIRGAS 2000');
 
 CREATE TABLE individuo(
-	tombo SERIAL NOT NULL PRIMARY KEY,
-	id_sp INT NOT NULL,
-	id_local INT NOT NULL,
+	tombo INTEGER AUTO_INCREMENT PRIMARY KEY,
+	id_sp INTEGER NOT NULL,
+	id_local INTEGER NOT NULL,
 	data_col DATE NOT NULL,
 	coletor VARCHAR(200) NOT NULL,
-	coordenadas INT,
+	coordenadas INTEGER,
 	obs VARCHAR(200),
 	vidro VARCHAR(10) NOT NULL,
-	CONSTRAINT fk_especie_individuo FOREIGN KEY(id_sp) REFERENCES especie(id_sp),
-	CONSTRAINT fk_localidade_individuo FOREIGN KEY(id_local) REFERENCES localidade(id_local),
-	CONSTRAINT fk_coletor_individuo FOREIGN KEY(coletor) REFERENCES coletor(email),
-	CONSTRAINT fk_coordenadas_individuo FOREIGN KEY(coordenadas) REFERENCES coordenadas(id_coo)
+	FOREIGN KEY(id_sp) REFERENCES especie(id_sp),
+	FOREIGN KEY(id_local) REFERENCES localidade(id_local),
+	FOREIGN KEY(coletor) REFERENCES coletor(email),
+	FOREIGN KEY(coordenadas) REFERENCES coordenadas(id_coo)
 );
 
-insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, obs, vidro) values (1, 1, '01-03-2016', 'laura@gmail.com', 1, 'estava atropelado', 'V-01');
-insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (2, 2, '01-04-2016', 'larissa@gmail.com', 2, 'V-01');
-insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, obs, vidro) values (3, 3, '01-04-2016', 'kika@gmail.com', 3, 'criado dois dias em cativeiro antes da fixação', 'V-02');
-insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (4, 4, '01-05-2016', 'anderson@gmail.com', 4, 'V-02');
-insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (5, 5, '01-06-2016', 'andre@gmail.com', 5, 'V-03');
-insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (6, 1, '01-01-2016', 'vitor@gmail.com', 1, 'V-03');
-insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (7, 2, '01-02-2016', 'carola@gmail.com', 2, 'V-04');
-insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (8, 3, '01-03-2016', 'carolo@gmail.com', 3, 'V-04');
-insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (9, 4, '01-04-2016', 'laura@gmail.com', 4, 'V-05');
-insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (10, 5, '01-05-2016', 'larissa@gmail.com', 5, 'V-05');
-insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (11, 1, '01-04-2016', 'kika@gmail.com', 1, 'V-05');
-insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (12, 2, '01-05-2016', 'larissa@gmail.com', 2, 'V-05');
-insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (13, 1, '01-04-2016', 'kika@gmail.com', 1, 'V-05');
-insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (14, 2, '01-05-2016', 'larissa@gmail.com', 2, 'V-05');
-insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (15, 1, '01-04-2016', 'kika@gmail.com', 1, 'V-05');
-insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (16, 2, '01-05-2016', 'larissa@gmail.com', 2, 'V-05');
+insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, obs, vidro) values (1, 1, '2016-01-03', 'laura@gmail.com', 1, 'estava atropelado', 'V-01');
+insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (2, 2, '2016-04-01', 'larissa@gmail.com', 2, 'V-01');
+insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, obs, vidro) values (3, 3, '2016-04-01', 'kika@gmail.com', 3, 'criado dois dias em cativeiro antes da fixação', 'V-02');
+insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (4, 4, '2016-04-01', 'anderson@gmail.com', 4, 'V-02');
+insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (5, 5, '2016-04-01', 'andre@gmail.com', 5, 'V-03');
+insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (6, 1, '2016-04-10', 'vitor@gmail.com', 1, 'V-03');
+insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (7, 2, '2016-04-15', 'carola@gmail.com', 2, 'V-04');
+insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (8, 3, '2016-04-15', 'carolo@gmail.com', 3, 'V-04');
+insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (9, 4, '2016-09-24', 'laura@gmail.com', 4, 'V-05');
+insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (10, 5, '2016-02-16', 'larissa@gmail.com', 5, 'V-05');
+insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (11, 1, '2016-03-30', 'kika@gmail.com', 1, 'V-05');
+insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (12, 2, '2013-07-01', 'larissa@gmail.com', 2, 'V-05');
+insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (13, 1, '2010-12-30', 'kika@gmail.com', 1, 'V-05');
+insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (14, 2, '2013-07-19', 'larissa@gmail.com', 2, 'V-05');
+insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (15, 1, '2015-03-17', 'kika@gmail.com', 1, 'V-05');
+insert into individuo(id_sp, id_local, data_col, coletor, coordenadas, vidro) values (16, 2, '2018-04-01', 'larissa@gmail.com', 2, 'V-05');
 
 CREATE TABLE tecido(
-	id_tec SERIAL NOT NULL PRIMARY KEY,
-	tombo INT NOT NULL,
+	id_tec INTEGER AUTO_INCREMENT PRIMARY KEY,
+	tombo INTEGER NOT NULL,
 	tipo VARCHAR(100) NOT NULL,
 	local VARCHAR(30) NOT NULL,
-	CONSTRAINT fk_individuo_tecido FOREIGN KEY(tombo) REFERENCES individuo(tombo)
+	FOREIGN KEY(tombo) REFERENCES individuo(tombo)
 );
 
 insert into tecido (tombo, tipo, local) values (1, 'FÍGADO', 'E01');

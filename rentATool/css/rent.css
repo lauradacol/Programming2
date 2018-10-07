@@ -176,6 +176,19 @@ div.produto:hover {
   transition: 0.5s;
 }
 
+div.produto-unico{
+	width: 500px;
+	height: 500px;
+	margin: 10px;
+	background-color: black;
+	text-align: left;
+	position: relative;
+	color: red;
+}
+
+
+
+
 /************************************************************************** mais pedidos */
 aside {
   background: rgb(200, 191, 231);
