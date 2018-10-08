@@ -1,5 +1,29 @@
 <?php
 include "includes/conexao.php";
+if(isset($_POST['inserir'])){
+	//botao cadastrar foi acionado, podemos inserir os dados
+	$nome_fam = $_POST['nome_fam'];
+	$nome_gen = $_POST['nome_gen'];
+	$nome_sp = $_POST['nome_sp'];
+	$localidade = $_POST['localidade'];
+	$coordenada = $_POST['coordenada'];
+	$coletor = $_POST['coletor'];
+	$data = $_POST['data'];
+	$vidro = $_POST['vidro'];
+	$obs = $_POST['obs'];					
+				
+	$sql = "INSERT INTO individuo (id_sp, id_local, data_col, coletor, coordenadas, obs, vidro) VALUES ($nome_sp, $localidade, $data, $coletor, $coordenadas, $obs, $vidro)";	
+	$resultado = mysqli_query($conexao, $sql);
+	
+	if($resultado){
+		$mensagem = "Indivíduo tombado com sucesso!";
+	}
+	else{
+		$mensagem = "Erro. O indivíduo não pode ser tombado!";
+		$mensagem .= mysqli_error($conexao); //para debug
+	}		
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +70,14 @@ include "includes/conexao.php";
 				<fieldset>
 					<legend>Inserir Indivíduo</legend>		
 					
-					<p id="numerotombo">1</p>				
+					
+					<?php
+						$sql = "select max(tombo) as tombo from individuo";
+						$resultado = mysqli_query($conexao,$sql);
+						$numerotombo = mysqli_fetch_array($resultado);
+					?>
+					
+					<p id="numerotombo"><?=intval($numerotombo['tombo'])+1?></p>				
 										
 					<div>
 						<label for="nome_fam" class="form-alinhado">Família:</label>
@@ -63,8 +94,8 @@ include "includes/conexao.php";
 					</div>	
 
 					<div>
-						<label for="nomegen" class="form-alinhado">Gênero:</label>
-							<select name="nomegen" id="nome_gen">
+						<label for="nome_gen" class="form-alinhado">Gênero:</label>
+							<select name="nome_gen" id="nome_gen">
 								<?php										
 									$sql = "SELECT * FROM genero ORDER BY nome_gen";
 									$resultado = mysqli_query($conexao,$sql);
@@ -76,8 +107,8 @@ include "includes/conexao.php";
 					</div>
 
 					<div>
-						<label for="nomesp" class="form-alinhado">Espécie:</label>
-							<select name="nomesp" id="nome_gen">
+						<label for="nome_sp" class="form-alinhado">Espécie:</label>
+							<select name="nome_sp" id="nome_sp">
 								<?php								
 									$sql = "SELECT * FROM especie ORDER BY nome_sp";
 									$resultado = mysqli_query($conexao,$sql);
@@ -128,8 +159,8 @@ include "includes/conexao.php";
 					</div>	
 			
 					<div>
-						<label for="date" class="form-alinhado">Data de Coleta:</label> 
-						<input id="date" type="date" name="date" required>			
+						<label for="data" class="form-alinhado">Data de Coleta:</label> 
+						<input id="data" type="date" name="data" required>			
 					</div>	
 			
 					<div>
@@ -139,20 +170,19 @@ include "includes/conexao.php";
 					
 					<div>
 						<label for="obs" class="form-alinhado">Observações: </label>
-						<textarea name="msg" maxlength="50"></textarea>			
+						<textarea name="obs" maxlength="50"></textarea>			
 					</div>				
 					
 					<div>
-						<input type="submit" value="Inserir" onclick="updateTombo()">
+						<input type="submit" id="botao" value="inserir" name="inserir">
 						<input type="reset" value="Limpar">
-					</div>		
-	
+					</div>			
 				</fieldset>		
 			</section>	
 		</form>								
 <!--INSERIR FAMILIA-->
 
-		
+		<!--
 		<section id="familia">
 			<fieldset>
 				<legend>Inserir Família:</legend>
@@ -324,7 +354,7 @@ include "includes/conexao.php";
 				</div>										
 			</fieldset>		
 		</section>		
-		
+		-->
 	</main>
 
 	<fieldset id="tombo">
@@ -340,403 +370,42 @@ include "includes/conexao.php";
 					<th>Localidade</th>
 					<th>Coordenadas</th>
 					<th>Coletor</th>
-					<th>Tecido</th>
+					<th>Tecido</th>				
 				</tr>
-				
-				<tr id="teste">
-					<td id = "tab_tombo"></td>
-					<td id = "tab_fam"></td>
-					<td id = "tab_gen"></td>
-					<td id = "tab_sp"></td>
-					<td id = "tab_loc"></td>
-					<td id = "tab_coo"></td>
-					<td id = "tab_col"></td>
-					<td id = "tab_tec"></td>																								
-				</tr>
-				
-				
-<!--				
+
+				<?php										
+				$sql = "select nome_fam, nome_gen, nome_sp, individuo.tombo, data_col, obs, vidro, nome_col, x, y, id_tec, localidade from ((((((familia left join genero on familia.id_fam = genero.id_fam) right join especie on genero.id_gen = especie.id_gen) right join individuo on especie.id_sp = individuo.id_sp) left join coletor on coletor.email = individuo.coletor) left join coordenadas on individuo.coordenadas = coordenadas.id_coo) left join tecido on individuo.tombo = tecido.tombo) left join localidade on localidade.id_local = individuo.id_local;";
+				$resultado = mysqli_query($conexao,$sql);
+				while ($linha = mysqli_fetch_array($resultado)){
+				?>	
+					
 				
 				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>				
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>				
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>				
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>		
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>				
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
+					<td id = "rTombo"><?=$linha['tombo'];?></td>
+					<td id = "rFamilia"><?=$linha['nome_fam'];?></td>
+					<td id = "rGenero"><?=$linha['nome_gen'];?></td>																												
+					<td id = "rEspecie"><?=$linha['nome_sp'];?></td>
+					<td id = "rLocalidade"><?=$linha['localidade'];?></td>
+					<td id = "rCoordenada"><?=$linha['x'].",".$linha['y'];?></td>					
+					<td id = "rColetor"><?=$linha['nome_col'];?></td>
+
+					<?php
+					if($linha['id_tec']==NULL){
+						$tecido = "NÃO";
+					}					
+					else{
+						$tecido = "SIM";
+					}
+					?>					
+					<td id = "rTecido"><?=$tecido;?></td>
 				</tr>											
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>				
-				<tr>
-					<td>001</td>
-					<td>Colubridae</td>
-					<td>Liophis</td>	
-					<td>miliaris</td>
-					<td>UFFS</td>
-					<td>01</td>
-					<td>Laura Dacol</td>
-					<td>Sim</td>							
-				</tr>
-				<tr>
-					<td>002</td>
-					<td>Viperidae</td>
-					<td>Bothrops</td>	
-					<td>jararaca</td>
-					<td>Ecoparque</td>
-					<td>02</td>
-					<td>José da Silva</td>
-					<td>Não</td>							
-				</tr>	-->				
+			<?php	
+				}
+			?>		
+			
+			
+				
+					
 			</table>		
 		</div>
 												
