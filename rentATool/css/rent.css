@@ -134,6 +134,7 @@ section.busca {
 }
 
 /*********************************************************************************** produtos */
+
 div.lista-produtos {
   display: flex;
   flex-direction: row;
@@ -176,18 +177,34 @@ div.produto:hover {
   transition: 0.5s;
 }
 
-div.produto-unico{
-	width: 500px;
-	height: 500px;
-	margin: 10px;
-	background-color: black;
-	text-align: left;
-	position: relative;
-	color: red;
+div.produto-unico img{
+	width: 100%;
+	box-shadow: 2px 2px 5px #333;
 }
 
+div.produto-unico .legenda{
+	box-shadow: 2px 2px 5px #333;
+	background-color: white;
+	margin-left: 5px;
+	padding: 10px;
+}
 
+div.produto-unico div.legenda .nome{
+	font-size: 2em;
+	font-family: 'Lobster', cursive;
+	color: red;
+	margin: 0;
+}
 
+div.produto-unico div.legenda .detalhes{
+	font-size: 1.5em;
+	font-family: 'Lobster', cursive;
+	color: grey;
+}
+
+div.produto-unico div.legenda .detalhes2{
+	color: grey;
+}
 
 /************************************************************************** mais pedidos */
 aside {
@@ -248,7 +265,9 @@ footer {
 	cursor: pointer;
 }
 
+
 /********************************************************************************* queries **/
+
 @media only screen and (min-width: 600px) {
   /* para tablets: */
     .col-1 {width: 30%;}
@@ -265,6 +284,17 @@ footer {
     footer {
       flex-direction: row;
     }      
+    
+    div.produto-unico img{
+		width: 50%;
+		float: left;
+	}
+    
+    div.produto-unico .legenda{
+		width: 45%;		
+		float: left;
+		position: relative;
+	}  
 }
 
 @media only screen and (min-width: 1000px) {
@@ -293,5 +323,5 @@ footer {
     #exibeMenu{
     	display: none;
     }
-
 }  
+*/
