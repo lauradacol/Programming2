@@ -1,10 +1,10 @@
 <?php
 include "../includes/conexao.php";
-if(isset($_POST['cadastrar'])){
-	// botão cadastrar foi acionado, podemos inserir os dados
+if(isset($_POST['alterar'])){
+	// botão alterar pressionado, validar os dados e fazer o update
 	$nome = addslashes($_POST['nome']);
 	$fabricante = ($_POST['fabricante'] == '') ? 'NULL' : $_POST['fabricante'];
-	$imagem = (empty($_FILES['arquivo']['name']))? 'NULL' : "'{$_FILES['arquivo']['name']}'"; 
+	$imagem = (empty($_FILES['arquivo']['name']))? 'imagem' : "'{$_FILES['arquivo']['name']}'"; 
 	$descricao = addslashes($_POST['descricao']);
 	$tensao = $_POST['tensao'];
 	$catMarcenaria = isset($_POST['marcenaria'])? 1 : 0;
@@ -41,7 +41,7 @@ if(isset($_POST['cadastrar'])){
 		$erros[] = "O valor final deve ser maior do que zero";
 	}
 
-	if($imagem <> 'NULL'){
+	if(!empty($_FILES['arquivo']['name'])){
 		$destino = "../img/produtos/".$_FILES['arquivo']['name'];
 		if(!move_uploaded_file($_FILES['arquivo']['tmp_name'], $destino)){
 			$erros[] = "Falha no upload do arquivo";
@@ -49,25 +49,31 @@ if(isset($_POST['cadastrar'])){
 	}
 
 	if (count($erros) == 0){ // nenhum erro encontrado
-	 	$sql = "INSERT INTO produto (nome, idFabricante, imagem, descricao, tensao, catMarcenaria, catJardinagem, catLimpeza, catEscritorio, catMecanica, catOutros, qtde, valor, desconto) VALUES
-	('$nome', $fabricante, $imagem, '$descricao', $tensao, $catMarcenaria, $catJardinagem, $catLimpeza, $catEscritorio, $catMecanica, $catOutros, $quantidade, $valor, $desconto)";
+	 	$sql = "UPDATE produto SET nome = '$nome', idFabricante = $fabricante, imagem = $imagem, descricao = '$descricao', tensao = $tensao, catMarcenaria = $catMarcenaria, catJardinagem = $catJardinagem, catLimpeza = $catLimpeza, catEscritorio = $catEscritorio, catMecanica = $catMecanica, catOutros = $catOutros, qtde = $quantidade, valor = $valor, desconto = $desconto WHERE id = {$_GET['id']}";
 		$resultado = mysqli_query($conexao, $sql);
 		if($resultado){
-			$mensagem = "O produto <strong>$nome</strong> foi inserido com sucesso";
+			$mensagem = "O produto <strong>$nome</strong> foi alterado com sucesso";
 		}
 		else{
-			$mensagem = "Erro. O produto não pôde ser cadastrado. ";
+			$mensagem = "Erro. O produto não pôde ser alterado. ";
 			$mensagem .= mysqli_error($conexao); // para debug
 		}
 	} // count erros
 }
+else{ // carrega dados atuais
+	$sql = "select * from produto where id = {$_GET['id']}";
+	$resultado = mysqli_query($conexao, $sql);
+	$dados = mysqli_fetch_array($resultado);
+}
 
 include "cabecalhoAdm.php";
+include "../includes/functions.php";
 ?>
+
 
 		<div class="container">
 			<main>
-				<h2>Cadastro de Produtos</h2>
+				<h2>Alteração de Produtos</h2>
 				<?php
 				if (isset($mensagem)){
 					echo "<p>$mensagem</p>";
@@ -89,7 +95,7 @@ include "cabecalhoAdm.php";
 							<div class="form-item">
 								<label for="nome" class="label-alinhado">Nome:</label>
 								<input type="text" id="nome" name="nome" size="50" autofocus 
-								value="<?=isset($_POST['nome']) ? $_POST['nome'] : '';?>">								
+								value="<?=isset($_POST['nome']) ? $_POST['nome'] : $dados['nome'];?>">								
 							</div>
 							
 							<div class="form-item">
@@ -104,6 +110,10 @@ include "cabecalhoAdm.php";
 											if(isset($_POST['fabricante'])){
 												if($_POST['fabricante'] == $registro['id'])  
 												  echo " selected";	
+											}
+											else{
+												if($dados['idFabricante'] == $registro['id'])  
+												  echo " selected";	
 											}	  
 											echo ">{$registro['nome']}</option>";
 										}
@@ -115,11 +125,18 @@ include "cabecalhoAdm.php";
 							<div class="form-item">
 								<label for="arquivo" class="label-alinhado">Selecione uma imagem:</label>
 								<input type="file" name="arquivo" id="arquivo">
+								<small><em>* deixe em branco para manter a imagem atual</em></small>
+							    <div class="produto">								  
+									<figure>
+										<img src="../img/produtos/<?=mostraImagem($dados['imagem']);?>" alt="<?=$dados['nome'];?>">							
+									</figure>							
+							    </div> 								
 							</div>
 
 							<div class="form-item">
 								<label for="desc" class="label-alinhado">Descrição:</label>
-								<textarea name="descricao" rows="5" cols="30" id="desc"><?=isset($_POST['descricao']) ? $_POST['descricao'] : '';?></textarea>
+								<textarea name="descricao" rows="5" cols="30" id="desc">
+									<?=isset($_POST['descricao']) ? $_POST['descricao'] : $dados['descricao'];?></textarea>
 							</div>
 							<div class="form-item">
 								<label class="label-alinhado">Tensão: </label>
@@ -128,7 +145,7 @@ include "cabecalhoAdm.php";
 									$tensao = $_POST['tensao']; 
 								}
 								else{
-									$tensao = 0;
+									$tensao = $dados['tensao'];
 								}
 								// $tensao = (isset($_POST['tensao']))? $_POST['tensao'] : 0;
 								?>
@@ -142,45 +159,45 @@ include "cabecalhoAdm.php";
 							<div class="form-item">
 								<label class="label-alinhado">Categorias:</label>
 								<label><input type="checkbox" id="marcenaria" name="marcenaria" 
-									<?=isset($_POST['marcenaria'])? "checked":'';?>>Marcenaria</label>
+									<?=isset($_POST['marcenaria'])? "checked":($dados['catMarcenaria'] == 1)? "checked": '';?>>Marcenaria</label>
 								<label><input type="checkbox" id="jardinagem" name="jardinagem"
-									<?=isset($_POST['jardinagem'])? "checked":'';?>>Jardinagem</label>
+									<?=isset($_POST['jardinagem'])? "checked":($dados['catJardinagem'] == 1)? "checked": '';?>>Jardinagem</label>
 								<label><input type="checkbox" id="limpeza" name="limpeza"
-									<?=isset($_POST['limpeza'])? "checked":'';?>>Limpeza</label>
+									<?=isset($_POST['limpeza'])? "checked":($dados['catLimpeza'] == 1)? "checked": '';?>>Limpeza</label>
 								<label><input type="checkbox" id="escritorio" name="escritorio"
-									<?=isset($_POST['escritorio'])? "checked":'';?>>Escritório</label>
+									<?=isset($_POST['escritorio'])? "checked":($dados['catEscritorio'] == 1)? "checked": '';?>>Escritório</label>
 								<label><input type="checkbox" id="mecanica" name="mecanica"
-									<?=isset($_POST['mecanica'])? "checked":'';?>>Mecânica</label>
+									<?=isset($_POST['mecanica'])? "checked":($dados['catMecanica'] == 1)? "checked": '';?>>Mecânica</label>
 								<label><input type="checkbox" id="outros" name="outros"
-									<?=isset($_POST['outros'])? "checked":'';?>>Outros</label>
+									<?=isset($_POST['outros'])? "checked":($dados['catOutros'] == 1)? "checked": '';?>>Outros</label>
 							</div>						
 						</fieldset>
 						<fieldset>
 							<legend><strong>Dados da locação</strong></legend>
 							<div class="form-item">
 								<label for="qntDis" class="label-alinhado">Quantidade Disponível:</label>
-								<input type="number" id="quantidade" name="quantidade" value="<?=isset($_POST['quantidade'])? $_POST['quantidade']:1;?>" min="1">
+								<input type="number" id="quantidade" name="quantidade" value="<?=isset($_POST['quantidade'])? $_POST['quantidade']:$dados['qtde'];?>" min="1">
 							</div>
 							<div class="form-item">
 								<label for="valor" class="label-alinhado">Valor da locação:</label>
-								<input type="text" id="valor" name="valor" placeholder="0.00" value="<?=isset($_POST['valor'])? $_POST['valor']:'';?>" 
+								<input type="text" id="valor" name="valor" placeholder="0.00" value="<?=isset($_POST['valor'])? $_POST['valor']:$dados['valor'];?>" 
 								onchange="calculaTotal()">
 							</div>
 							<div class="form-item">
 								<label for="desconto" class="label-alinhado">Desconto promocional:</label>
-								<input type="text" id="desconto" name="desconto" value="<?=isset($_POST['desconto'])? $_POST['desconto']:'0.00';?>" 
+								<input type="text" id="desconto" name="desconto" value="<?=isset($_POST['desconto'])? $_POST['desconto']:$dados['desconto'];?>" 
 								onchange="calculaTotal()">
 							</div>
 							<div class="form-item">						
 								<label for="total" class="label-alinhado">Total:</label>
-								<div id="total">0.00</div>
+								<div id="total"><?=($dados['valor'] - $dados['desconto']);?></div>
 							</div>
 
 							<div class="form-item">
 						    	<label class="label-alinhado"></label>
-						    	<input type="submit" id="botao" value="Cadastrar" 
-						    	name="cadastrar">
-						    	<input type="reset" value="Limpar">
+						    	<input type="submit" id="botao" value="Alterar" 
+						    	name="alterar">
+						    	<input type="reset" value="Redefinir">
 						    </div>						
 						</fieldset>
 					</div>

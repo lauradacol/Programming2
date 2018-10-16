@@ -12,16 +12,40 @@ if(isset($_POST['inserir'])){
 	$vidro = $_POST['vidro'];
 	$obs = $_POST['obs'];					
 				
-	$sql = "INSERT INTO individuo (id_sp, id_local, data_col, coletor, coordenadas, obs, vidro) VALUES ($nome_sp, $localidade, $data, $coletor, $coordenadas, $obs, $vidro)";	
-	$resultado = mysqli_query($conexao, $sql);
+	$erros = array();
+
+	if(empty($nome_fam)){
+		$erros[] = "Selecione uma família!";
+	}	
+	if(empty($nome_gen)){
+		$erros[] = "Selecione um gênero!";
+	}	
+	if(empty($nome_sp)){
+		$erros[] = "Selecione uma espécie!";
+	}	
+	if(empty($localidade)){
+		$erros[] = "Selecione uma localidade!";
+	}	
+	if(empty($coordenada)){
+		$erros[] = "Selecione uma coordenada!";
+	}	
+	if(empty($coletor)){
+		$erros[] = "Selecione um coletor!";
+	}			
 	
-	if($resultado){
-		$mensagem = "Indivíduo tombado com sucesso!";
+	if (count($erros) == 0){ // nenhum erro encontrado
+		$sql = "INSERT INTO individuo (id_sp, id_local, data_col, coletor, coordenadas, obs, vidro) VALUES ($nome_sp, $localidade, '$data', '$coletor', $coordenada, '$obs', '$vidro')";	
+		$resultado = mysqli_query($conexao, $sql);
+		
+		if($resultado){
+			$mensagem = "Indivíduo tombado com sucesso!";
+		}
+		else{
+			$mensagem = "Erro. O indivíduo não pode ser tombado!";
+			$mensagem .= mysqli_error($conexao); //para debug
+		}		
 	}
-	else{
-		$mensagem = "Erro. O indivíduo não pode ser tombado!";
-		$mensagem .= mysqli_error($conexao); //para debug
-	}		
+	// count erros			
 }
 
 ?>
@@ -65,121 +89,151 @@ if(isset($_POST['inserir'])){
 	
 	<main>
 		<!--INSERIR INDIVÍDUO-->
-		<form action="" method="post" id="form-individuo">
-			<section id="individuo">
-				<fieldset>
-					<legend>Inserir Indivíduo</legend>		
+		<?php
+			if (isset($mensagem)){
+				echo "<p>$mensagem</p>";
+			}
+			else{ // carrega form
+				if(isset($erros)){
+					echo "<ul>";
+					foreach ($erros as $erro){
+						echo "<li style='color: red;'>$erro</li>";
+					}
+					echo "</ul>";
+				}
+				?>
+		
+		
+			<form action="" method="post" id="form-individuo">
+				<div id="individuo">
+					<fieldset>
+						<legend>Inserir Indivíduo</legend>						
+						
+						<?php
+							$sql = "select max(tombo) as tombo from individuo";
+							$resultado = mysqli_query($conexao,$sql);
+							$numerotombo = mysqli_fetch_array($resultado);
+						?>
+						
+						<p id="numerotombo"><?=intval($numerotombo['tombo'])+1?></p>				
+											
+						<div>
+							<label for="nome_fam" class="form-alinhado">Família:</label>
+								<select name="nome_fam" id="nome_fam">
+									<option value = "">Selecione uma família:</option>
+									<?php										
+										$sql = "SELECT * FROM familia ORDER BY nome_fam";
+										$resultado = mysqli_query($conexao,$sql);
+										while ($familia = mysqli_fetch_array($resultado)){
+											echo "<option value ='{$familia['id_fam']}'>{$familia['nome_fam']}</option>";											
+										}
+									?>				
+								</select>
 					
-					
-					<?php
-						$sql = "select max(tombo) as tombo from individuo";
-						$resultado = mysqli_query($conexao,$sql);
-						$numerotombo = mysqli_fetch_array($resultado);
-					?>
-					
-					<p id="numerotombo"><?=intval($numerotombo['tombo'])+1?></p>				
-										
-					<div>
-						<label for="nome_fam" class="form-alinhado">Família:</label>
-							<select name="nome_fam" id="nome_fam">
-								<?php										
-									$sql = "SELECT * FROM familia ORDER BY nome_fam";
-									$resultado = mysqli_query($conexao,$sql);
-									while ($familia = mysqli_fetch_array($resultado)){
-										echo "<option value ='{$familia['id_fam']}'>{$familia['nome_fam']}</option>";											
-									}
-								?>				
-							</select>
+						</div>	
+
+						<div>
+							<label for="nome_gen" class="form-alinhado">Gênero:</label>
+								<select name="nome_gen" id="nome_gen">
+									<option value = "">Selecione um gênero:</option>								
+									<?php										
+										$sql = "SELECT * FROM genero ORDER BY nome_gen";
+										$resultado = mysqli_query($conexao,$sql);
+										while ($genero = mysqli_fetch_array($resultado)){
+											echo "<option value ='{$genero['id_gen']}'>{$genero['nome_gen']}</option>";											
+										}
+									?>						
+								</select>					
+						</div>
+
+						<div>
+							<label for="nome_sp" class="form-alinhado">Espécie:</label>
+								<select name="nome_sp" id="nome_sp">
+									<option value = "">Selecione uma espécie:</option>
+									<?php								
+										$sql = "SELECT * FROM especie ORDER BY nome_sp";
+										$resultado = mysqli_query($conexao,$sql);
+										while ($especie = mysqli_fetch_array($resultado)){
+											echo "<option value ='{$especie['id_sp']}'>{$especie['nome_sp']}</option>";											
+										}
+									?>					
+								</select>					
+						</div>	
+						
+						<div>
+							<label for="localidade" class="form-alinhado">Localidade:</label>
+								<select name="localidade" id="localidade">
+									<option value = "">Selecione uma localidade:</option>								
+									<?php								
+										$sql = "SELECT * FROM localidade ORDER BY localidade";
+										$resultado = mysqli_query($conexao,$sql);
+										while ($localidade = mysqli_fetch_array($resultado)){
+											echo "<option value ='{$localidade['id_local']}'>{$localidade['localidade']}</option>";											
+										}
+									?>	
+								</select>					
+						</div>				
+						
+						<div>
+							<label for="coordenada" class="form-alinhado">ID da Coordenada:</label>
+								<select name="coordenada" id="coordenada">
+								<option value = "">Selecione uma coordenada:</option>
+									<?php								
+										$sql = "SELECT * FROM coordenadas";
+										$resultado = mysqli_query($conexao,$sql);
+										while ($coordenadas = mysqli_fetch_array($resultado)){
+											echo "<option value ='{$coordenadas['id_coo']}'>{$coordenadas['id_coo']}</option>";											
+										}
+									?>					
+								</select>					
+						</div>				
+
+						<div>
+							<label for="coletor" class="form-alinhado">Coletor:</label>
+								<select name="coletor" id="coletor">
+									<option value = "">Selecione um coletor:</option>								
+									<?php								
+										$sql = "SELECT * FROM coletor order by nome_col";
+										$resultado = mysqli_query($conexao,$sql);
+										while ($coletor = mysqli_fetch_array($resultado)){
+											echo "<option value ='{$coletor['email']}'>{$coletor['nome_col']}</option>";											
+										}
+									?>	
+								</select>					
+						</div>	
 				
-					</div>	
-
-					<div>
-						<label for="nome_gen" class="form-alinhado">Gênero:</label>
-							<select name="nome_gen" id="nome_gen">
-								<?php										
-									$sql = "SELECT * FROM genero ORDER BY nome_gen";
-									$resultado = mysqli_query($conexao,$sql);
-									while ($genero = mysqli_fetch_array($resultado)){
-										echo "<option value ='{$genero['id_gen']}'>{$genero['nome_gen']}</option>";											
-									}
-								?>						
-							</select>					
-					</div>
-
-					<div>
-						<label for="nome_sp" class="form-alinhado">Espécie:</label>
-							<select name="nome_sp" id="nome_sp">
-								<?php								
-									$sql = "SELECT * FROM especie ORDER BY nome_sp";
-									$resultado = mysqli_query($conexao,$sql);
-									while ($especie = mysqli_fetch_array($resultado)){
-										echo "<option value ='{$especie['id_sp']}'>{$especie['nome_sp']}</option>";											
-									}
-								?>					
-							</select>					
-					</div>	
-					
-					<div>
-						<label for="localidade" class="form-alinhado">Localidade:</label>
-							<select name="localidade" id="localidade">
-								<?php								
-									$sql = "SELECT * FROM localidade ORDER BY localidade";
-									$resultado = mysqli_query($conexao,$sql);
-									while ($localidade = mysqli_fetch_array($resultado)){
-										echo "<option value ='{$localidade['id_local']}'>{$localidade['localidade']}</option>";											
-									}
-								?>	
-							</select>					
-					</div>				
-					
-					<div>
-						<label for="coordenada" class="form-alinhado">ID da Coordenada:</label>
-							<select name="coordenada" id="coordenada">
-								<?php								
-									$sql = "SELECT * FROM coordenadas";
-									$resultado = mysqli_query($conexao,$sql);
-									while ($coordenadas = mysqli_fetch_array($resultado)){
-										echo "<option value ='{$coordenadas['id_coo']}'>{$coordenadas['id_coo']}</option>";											
-									}
-								?>					
-							</select>					
-					</div>				
-
-					<div>
-						<label for="coletor" class="form-alinhado">Coletor:</label>
-							<select name="coletor" id="coletor">
-								<?php								
-									$sql = "SELECT * FROM coletor order by nome_col";
-									$resultado = mysqli_query($conexao,$sql);
-									while ($coletor = mysqli_fetch_array($resultado)){
-										echo "<option value ='{$coletor['email']}'>{$coletor['nome_col']}</option>";											
-									}
-								?>	
-							</select>					
-					</div>	
-			
-					<div>
-						<label for="data" class="form-alinhado">Data de Coleta:</label> 
-						<input id="data" type="date" name="data" required>			
-					</div>	
-			
-					<div>
-						<label for="vidro" class="form-alinhado">Vidro de Armazenamento: </label>
-						<input type="text" name="vidro" id="vidro" maxlength="10" required>			
-					</div>	
-					
-					<div>
-						<label for="obs" class="form-alinhado">Observações: </label>
-						<textarea name="obs" maxlength="50"></textarea>			
-					</div>				
-					
-					<div>
-						<input type="submit" id="botao" value="inserir" name="inserir">
-						<input type="reset" value="Limpar">
-					</div>			
-				</fieldset>		
-			</section>	
-		</form>								
+						<div>
+							<label for="data" class="form-alinhado">Data de Coleta:</label> 
+							<input id="data" type="date" name="data" required>			
+						</div>	
+				
+						<div>
+							<label for="vidro" class="form-alinhado">Vidro de Armazenamento: </label>
+							<input type="text" name="vidro" id="vidro" maxlength="10" required>			
+						</div>	
+						
+						<div>
+							<label for="obs" class="form-alinhado">Observações: </label>
+							<textarea name="obs" maxlength="50"></textarea>			
+						</div>				
+						
+						<div>
+							<input type="submit" id="botao" value="Inserir" name="inserir">
+							<input type="reset" value="Limpar">
+							
+							
+							
+						
+							
+							
+							
+						</div>			
+					</fieldset>		
+				</div>	
+			</form>			
+			<?php
+			} // fecha else
+			?>								
 <!--INSERIR FAMILIA-->
 
 		<!--

@@ -2,7 +2,7 @@
 $host = "127.0.0.1";
 $user = "root";
 $senha = "";
-$database = "chufsc";
+$database = "rent";
 $conexao = mysqli_connect($host, $user, $senha, $database) or
 die("Houve um erro de conexão ao banco de dados.");
 mysqli_query($conexao, "SET NAMES 'utf8'");

@@ -7,6 +7,7 @@ function calculaTotal() {
   total.innerHTML = valor_total;
 }
 
+
 function cadastroProduto() {
   if(document.getElementById('nome').value.length <= 0) {
     alert('O nome do produto está em branco');
@@ -22,11 +23,5 @@ function cadastroProduto() {
     alert('O valor final deve ser maior que zero');
     return false;
   }
-}
-
-function confirmaExclusao(){
-	if(!(confirm("Tem certeza que deseja excluir este produto?"))){
-		return false;
-	}
 }
 

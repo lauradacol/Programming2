@@ -79,7 +79,7 @@ include "includes/layout/cabecalho.php";
 					<div class="detalhes2">
 						<p class= "fab">Fabricante: <?=$fab?></p>
 						<p class= "tensao">Tensão: <?=$ten?></p>					
-						<p class= "desc">Descricao: <?=$produto['descricao']?></p>				
+						<p class= "desc">Descricao: <?=nl2br($produto['descricao']);?></p>				
 					</div>
 					
 					<p class="detalhes">Categorias:</p>
@@ -124,8 +124,6 @@ include "includes/layout/cabecalho.php";
 	<?php
 	include "includes/layout/maisPedidos.php";
 	?>	
-
-
 	<!-- fim area central -->
 
 <?php
