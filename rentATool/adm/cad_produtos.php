@@ -49,7 +49,7 @@ if(isset($_POST['cadastrar'])){
 	}
 
 	if (count($erros) == 0){ // nenhum erro encontrado
-	 	$sql = "INSERT INTO produto (nome, idFabricante, imagem, descricao, tensao, catMarcenaria, catJardinagem, catLimpeza, catEscritorio, catMecanica, catOutros, qtde, valor, desconto) VALUES
+	 	echo $sql = "INSERT INTO produto (nome, idFabricante, imagem, descricao, tensao, catMarcenaria, catJardinagem, catLimpeza, catEscritorio, catMecanica, catOutros, qtde, valor, desconto) VALUES
 	('$nome', $fabricante, $imagem, '$descricao', $tensao, $catMarcenaria, $catJardinagem, $catLimpeza, $catEscritorio, $catMecanica, $catOutros, $quantidade, $valor, $desconto)";
 		$resultado = mysqli_query($conexao, $sql);
 		if($resultado){
@@ -64,6 +64,7 @@ if(isset($_POST['cadastrar'])){
 
 include "cabecalhoAdm.php";
 ?>
+
 
 		<div class="container">
 			<main>
