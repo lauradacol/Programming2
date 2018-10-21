@@ -9,5 +9,6 @@
 	</footer>
 	<!-- fim rodape -->
 	<script src="js/functions.js"></script>
+	<script src="js/cad_cliente.js"></script>
 </body>
 </html>

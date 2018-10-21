@@ -4,7 +4,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="utf-8">
 	<title>Rent a Tool</title>
-	<link rel="stylesheet" type="text/css" href="css/rent.css">
+	<link rel="stylesheet" type="text/css" href="../css/rent.css">
 	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> <!-- web font Lobster -->
 </head>
 <body>
@@ -20,22 +20,26 @@
 			<h2>Acesso</h2>
 			<form action="verificaLogin.php" method="post">
 				Login: <input type="text" name="login"><br>
-				Senha: <input type="password" name="senha"><br>
+				Senha: <input type="password" name="senhaUsuario"><br>	
+			
 				<div style="color: red">
 					<?php
 					if(isset($_GET['erro'])){
-						if($_GET['erro'] == 1)
+						if($_GET['erro'] == 1){
 							echo "Login incorreto";
+						}
 						elseif($_GET['erro'] == 2)
 							echo "Senha incorreta";
-					}
+					}				
 					?>
 				</div>
 				<input type="submit" value="Entrar">
 			</form>			
+			
+			
 		</div>			
 	</div>	
 
 <?php
-include "includes/layout/rodape.php";
+include "../includes/layout/rodape.php";
 ?>	

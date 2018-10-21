@@ -49,7 +49,7 @@ if(isset($_POST['cadastrar'])){
 	}
 
 	if (count($erros) == 0){ // nenhum erro encontrado
-	 	echo $sql = "INSERT INTO produto (nome, idFabricante, imagem, descricao, tensao, catMarcenaria, catJardinagem, catLimpeza, catEscritorio, catMecanica, catOutros, qtde, valor, desconto) VALUES
+	 	$sql = "INSERT INTO produto (nome, idFabricante, imagem, descricao, tensao, catMarcenaria, catJardinagem, catLimpeza, catEscritorio, catMecanica, catOutros, qtde, valor, desconto) VALUES
 	('$nome', $fabricante, $imagem, '$descricao', $tensao, $catMarcenaria, $catJardinagem, $catLimpeza, $catEscritorio, $catMecanica, $catOutros, $quantidade, $valor, $desconto)";
 		$resultado = mysqli_query($conexao, $sql);
 		if($resultado){
@@ -196,6 +196,11 @@ include "cabecalhoAdm.php";
 		
 		</div>
 		<section class="ultimos">
+			<?php
+				$sql = "select produto.nome as nome, fabricante.nome as fabricante, valor, desconto from produto left join fabricante on produto.idFabricante = fabricante.id order by produto.id desc limit 3";
+				$resultado = mysqli_query($conexao, $sql);			
+			?>
+			
 			<h4>Últimos produtos cadastrados:</h4>
 			<table>
 				<tr>
@@ -203,23 +208,33 @@ include "cabecalhoAdm.php";
 					<th>Fabricante</th>
 					<th>Valor da locação</th>
 				</tr>
-				<tr>
-					<td>Serra Elétrica</td>
-					<td>Makita</td>
-					<td>35.00</td>
-				</tr>
-				<tr>
-					<td>Lava a Jato</td>
-					<td>Trapp</td>
-					<td>28.00</td>
-				</tr>
-				<tr>
-					<td>Martelo</td>
-					<td>Bosch</td>
-					<td>6.00</td>
-				</tr>
+				<?php
+					while($ultimos = mysqli_fetch_array($resultado)){
+					?>
+					<tr>
+						<td><?=$ultimos['nome'];?></td>
+						
+						<?php
+							if($ultimos['fabricante']==NULL){
+								$nomeFab = 'Não Informado';
+							}
+							else{
+								$nomeFab = $ultimos['fabricante'];
+							}
+						?>
+						
+						<td><?=$nomeFab;?></td>
+						<td><?="R$ ".number_format(($ultimos['valor']-$ultimos['desconto']),2);?></td>						
+					</tr>
+				<?php
+				}				
+				?>
 			</table>
 		</section>
+
+
+
+
 
 <?php
 include "rodapeAdm.php";

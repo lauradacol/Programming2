@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<title>Rent a Tool</title>
 	<link rel="stylesheet" type="text/css" href="css/rent.css">
+		<link rel="stylesheet" type="text/css" href="css/forms.css">
 	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> <!-- web font Lobster -->
 </head>
 <body>
