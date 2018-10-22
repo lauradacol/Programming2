@@ -1,3 +1,7 @@
+<?php
+include "sessionstart.php";
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -5,7 +9,8 @@
 	<meta charset="utf-8">
 	<title>Rent a Tool</title>
 	<link rel="stylesheet" type="text/css" href="css/rent.css">
-		<link rel="stylesheet" type="text/css" href="css/forms.css">
+	<link rel="stylesheet" type="text/css" href="css/forms.css">
+	<link rel="stylesheet" type="text/css" href="css/produto_carrinho.css">	
 	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> <!-- web font Lobster -->
 </head>
 <body>
@@ -15,7 +20,7 @@
 		<p class="usuario-logado">Olá, <?=$_SESSION['nome'];?><span id="abrir-menu-usuario">&or;</span></p>
 		
 		<div class="menu-usuario">
-			<a href="#">Meu carrinho <img src="img/cart.png" width="32"></a>
+			<a href="carrinho.php">Meu carrinho <img src="img/cart.png" width="32"></a>
 			<br>
 			<a href="sair.php">Sair</a>			
 		</div>

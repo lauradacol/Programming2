@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<title>Rent a Tool</title>
 	<link rel="stylesheet" type="text/css" href="css/rent.css">
+	<link rel="stylesheet" type="text/css" href="css/forms.css">	
 	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> <!-- web font Lobster -->
 </head>
 <body>
@@ -19,8 +20,10 @@
 		<div class="box">
 			<h2>Acesso</h2>
 			<form action="verificaLogin.php" method="post">
-				Login: <input type="text" name="loginUsuario"><br>
-				Senha: <input type="password" name="senhaUsuario"><br>	
+				<label for="loginUsuario" class="label-alinhado">Login:</label>
+				<input type="text" name="loginUsuario"><br>
+				<label for="senhaUsuario" class="label-alinhado">Senha:</label>
+				<input type="password" name="senhaUsuario"><br>	
 			
 				<div style="color: red">
 					<?php
@@ -36,6 +39,8 @@
 				<input type="submit" value="Entrar">
 			</form>			
 			
+			<p><a href="cad_cliente.php">Quero me cadastrar</a></p>
+			<p><a href="#">Esqueci minha senha</a></p>
 			
 		</div>			
 	</div>	

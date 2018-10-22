@@ -240,13 +240,17 @@ div.produto-unico div.legenda .detalhes2{
 	justify-content: center;
 	align-items: center;
 	background-color: #D6E9FE;	
+	padding: 5px;
 }
 
 .box{
-	width: 300px;
+	width: 450px;
 	height: 300px;
 	background-color: #fff;
 	padding: 20px;
+	border-top: 10px solid #5995DA;
+	border-bottom: 5px solid #5995DA;
+	
 }
 
 
