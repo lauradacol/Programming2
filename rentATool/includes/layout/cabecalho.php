@@ -12,7 +12,15 @@
 	<!-- cabeçalho -->
 	<header>
 		<h1>Rent a Tool</h1>
-		<p class="carrinho"><a href="#">Meu carrinho <img src="img/cart.png" width="32"></a></p>
+		<p class="usuario-logado">Olá, <?=$_SESSION['nome'];?><span id="abrir-menu-usuario">&or;</span></p>
+		
+		<div class="menu-usuario">
+			<a href="#">Meu carrinho <img src="img/cart.png" width="32"></a>
+			<br>
+			<a href="sair.php">Sair</a>			
+		</div>
+		
+		
 		<p id="exibeMenu">Menu</p>
 		<nav class="menu-opcoes">    
 			<ul>

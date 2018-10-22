@@ -57,11 +57,38 @@ header h1 {
   font-size: 3em;
 }
 
-.carrinho {
+.usuario {
   position: absolute;
   top: 0;
   right: 10px;
+  color: red;
 }
+
+.usuario-logado {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+}
+
+.usuario-logado #abrir-menu-usuario{
+	background-color: #ccc;
+	cursor: pointer;
+	margin-left: 10px;
+	padding: 2px;
+}
+
+.menu-usuario{
+	width: 140px;
+	height: 70px;
+	background-color: #5995DA;
+	color: black;
+	position: absolute;
+	right: 10px;
+	top: 35px;
+	display: none;
+}
+
+
 
 /******************************************************************** menu superior */
 .menu-opcoes {
@@ -282,8 +309,7 @@ footer {
 	cursor: pointer;
 }
 
-
-/********************************************************************************* queries **/
+/********************************************************************************* queries */
 
 @media only screen and (min-width: 600px) {
   /* para tablets: */
@@ -341,4 +367,4 @@ footer {
     	display: none;
     }
 }  
-*/
+

@@ -4,7 +4,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="utf-8">
 	<title>Rent a Tool</title>
-	<link rel="stylesheet" type="text/css" href="../css/rent.css">
+	<link rel="stylesheet" type="text/css" href="css/rent.css">
 	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> <!-- web font Lobster -->
 </head>
 <body>
@@ -19,7 +19,7 @@
 		<div class="box">
 			<h2>Acesso</h2>
 			<form action="verificaLogin.php" method="post">
-				Login: <input type="text" name="login"><br>
+				Login: <input type="text" name="loginUsuario"><br>
 				Senha: <input type="password" name="senhaUsuario"><br>	
 			
 				<div style="color: red">
@@ -41,5 +41,5 @@
 	</div>	
 
 <?php
-include "../includes/layout/rodape.php";
+include "includes/layout/rodape.php";
 ?>	

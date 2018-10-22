@@ -1,4 +1,6 @@
 <?php
+include "includes/sessionstart.php";
+
 include "includes/layout/cabecalho.php";
 ?>
 	<!-- area central com 3 colunas -->
