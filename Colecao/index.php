@@ -60,6 +60,8 @@ if(isset($_POST['inserir'])){
 	<link href="https://fonts.googleapis.com/css?family=Kanit:200" rel="stylesheet">
 	
 	<link rel="stylesheet" type="text/css" href="css/colecao.css">
+	<!--jQuery-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 	<title>CHUFSC</title>
 </head>
@@ -134,6 +136,14 @@ if(isset($_POST['inserir'])){
 
 						<div>
 							<label for="nome_gen" class="form-alinhado">Gênero:</label>
+								<select name="nome_gen" id="nome_gen" style="display:none"></select>					
+						</div>
+
+
+						<!--
+						
+						<div>
+							<label for="nome_gen" class="form-alinhado">Gênero:</label>
 								<select name="nome_gen" id="nome_gen">
 									<option value = "">Selecione um gênero:</option>								
 									<?php										
@@ -159,6 +169,8 @@ if(isset($_POST['inserir'])){
 									?>					
 								</select>					
 						</div>	
+						
+						-->
 						
 						<div>
 							<label for="localidade" class="form-alinhado">Localidade:</label>
@@ -221,11 +233,7 @@ if(isset($_POST['inserir'])){
 							<input type="submit" id="botao" value="Inserir" name="inserir">
 							<input type="reset" value="Limpar">
 							
-							
-							
-						
-							
-							
+														
 							
 						</div>			
 					</fieldset>		
@@ -470,6 +478,31 @@ if(isset($_POST['inserir'])){
 	</footer>
 	
 	<script src="js/colecao.js"></script>
+	
+	<script>
+		$("#nome_fam").on("change",function(){
+		var idFamilia = $("#nome_fam").val();
+		
+		$.ajax({
+			url: 'pegaGenero.php',
+			type: 'POST',
+			data:{id:idFamilia},
+			beforeSente: function(){
+				$("#nome_gen").css({'display':'block'});
+				$("#nome_gen").html("Carregando gêneros...");
+			},
+			sucess: function(data){
+				$("#nome_fam").css({'display':'block'});
+				$("#nome_fam").html(data);
+			},
+			error: function(data){
+				$("#nome_fam").css({'display':'block'});
+				$("#nome_fam").html("Houve um erro ao carregar os gêneros");			
+			}
+			
+			});
+		});
 
+	</script>
 </body>
 </html>

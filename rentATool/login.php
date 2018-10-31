@@ -20,9 +20,9 @@
 		<div class="box">
 			<h2>Acesso</h2>
 			<form action="verificaLogin.php" method="post">
-				<label for="loginUsuario" class="label-alinhado">Login:</label>
+				<label for="loginUsuario" class="login-alinhado">Login:</label>
 				<input type="text" name="loginUsuario"><br>
-				<label for="senhaUsuario" class="label-alinhado">Senha:</label>
+				<label for="senhaUsuario" class="login-alinhado">Senha:</label>
 				<input type="password" name="senhaUsuario"><br>	
 			
 				<div style="color: red">
@@ -39,9 +39,10 @@
 				<input type="submit" value="Entrar">
 			</form>			
 			
-			<p><a href="cad_cliente.php">Quero me cadastrar</a></p>
-			<p><a href="#">Esqueci minha senha</a></p>
-			
+			<div class="querocadastrar">
+				<p><a href="cad_cliente.php">Quero me cadastrar</a></p>
+				<p><a href="#">Esqueci minha senha</a></p>
+			</div>
 		</div>			
 	</div>	
 
