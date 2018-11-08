@@ -32,8 +32,10 @@ include "includes/layout/cabecalho.php";
 				?>
 				<div class="itemCarrinho">
 					<span class="produtoCarrinho"><strong><?=$item['nome'];?></strong></span>
-					<span class="qtdeCarrinho"><strong><?=$item['quantidade'];?></strong></span>
-					<span class="precoCarrinho"><strong><?=formataPreco($item['valorFinal']);?></strong></span>
+					<input type="number" id="quantidade" name="quantidade" value=<?=$item['quantidade'];?> onchange=atualizaQuantidade(<?=$item['quantidade'];?>)>
+				
+					<!-- <span class="qtdeCarrinho"><strong><?=$item['quantidade'];?></strong></span> -->
+					<span class="precoCarrinho" id="precoItem"><strong><?=formataPreco($item['valorFinal']);?></strong></span>
 					<span class="excluirCarrinho"><a href="excluirCarrinho.php?id=<?=$id;?>" title="excluir item">X</a></span>
 				</div>
 				<?php
@@ -42,7 +44,7 @@ include "includes/layout/cabecalho.php";
 				?>
 				<div class="itemCarrinho total">
 					<span>Total:</span>
-					<span class="precoCarrinho"><strong><?=formataPreco($total);?></strong></span>
+					<span class="precoCarrinho" id="precoCarrinho"><strong><?=formataPreco($total);?></strong></span>
 				</div>
 				
 				<div class="botoes">

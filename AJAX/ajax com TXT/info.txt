@@ -1,0 +1,1 @@
+este texto foi carregado assincronamente pelo AJAX

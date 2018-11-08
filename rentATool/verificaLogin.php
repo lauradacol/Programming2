@@ -7,7 +7,7 @@
 	
 	if($login){	
 		
-		$sqlSenha = "select id, nome, login, senha from cliente where senha=md5('{$_POST['senhaUsuario']}')";
+		$sqlSenha = "select id, nome, login, endereco, senha from cliente where senha=md5('{$_POST['senhaUsuario']}')";
 		$resultadoSenha = mysqli_query($conexao, $sqlSenha);
 		$loginSenha = mysqli_fetch_array($resultadoSenha);
 		
@@ -17,6 +17,8 @@
 			$_SESSION['login'] = $_POST['loginUsuario']; // armazena login na sessao
 			$_SESSION['inicio'] = date("H:i:s"); // armazena horario na sessao
 			$_SESSION['nome'] = $loginSenha['nome'];
+			$_SESSION['id'] = $loginSenha['id'];			
+			$_SESSION["endereco"] = $loginSenha["endereco"].", ".$loginSenha['bairro'];			
 			header("Location: index.php");					
 		}
 		

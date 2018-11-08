@@ -149,6 +149,12 @@ h2 {
   text-decoration: none;
 } 
 
+.carrinho {
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
+
 /************************************************************************************ busca */
 section.busca {
   border-radius: 10px;
@@ -171,10 +177,24 @@ div.lista-produtos {
 
 div.produto{
   width: 200px;
-  height: 200px;
+  height: 250px;
   margin: 10px;
   background-color: white;
   text-align: center;
+}
+
+div.produto .rapida{
+  margin: 20px 5px;
+  padding: 3px;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+div.produto .noCarrinho{
+  margin: 20px 5px;
+  padding: 3px;
+  background-color: lightgreen;  
+  cursor: default;
 }
 
 div.produto figure{
@@ -231,6 +251,10 @@ div.produto-unico div.legenda .detalhes{
 
 div.produto-unico div.legenda .detalhes2{
 	color: grey;
+}
+
+#quantidade{
+	width: 90px;
 }
 
 /************************************************************************** login */

@@ -17,14 +17,29 @@ include "sessionstart.php";
 	<!-- cabeçalho -->
 	<header>
 		<h1>Rent a Tool</h1>
-		<p class="usuario-logado">Olá, <?=$_SESSION['nome'];?><span id="abrir-menu-usuario">&or;</span></p>
+		<!--<p class="usuario-logado">Olá, <?=$_SESSION['nome'];?><span id="abrir-menu-usuario">&or;</span></p> -->
 		
-		<div class="menu-usuario">
-			<a href="carrinho.php">Meu carrinho <img src="img/cart.png" width="32"></a>
-			<br>
-			<a href="sair.php">Sair</a>			
-		</div>
 		
+		<?php
+			if(isset($_SESSION["login"]) && isset($_SESSION["nome"])){
+				$variavel = "Olá, ";
+				$variavel.= $_SESSION["nome"] ;
+				$variavel.="! <a href=\"sair.php\">(Sair)</a>";
+			}else{
+				$variavel = "<a href=\"login.php\">Login</a>";
+			}
+			 ?>
+		<p class="carrinho"><?=$variavel?> &nbsp;&nbsp;&nbsp;&nbsp;<a href="carrinho.php">Meu carrinho 
+			
+			<span id="numItensCarrinho">
+				<?php 
+				if(isset($_SESSION['carrinho']))
+					echo "(".count($_SESSION['carrinho']).")";
+				?>
+			</span>
+			
+			<img src="img/cart.png" width="32"></a></p>
+			
 		
 		<p id="exibeMenu">Menu</p>
 		<nav class="menu-opcoes">    

@@ -58,8 +58,17 @@ include "includes/layout/cabecalho.php";
 								<img src="img/produtos/<?=mostraImagem($produto['imagem']);?>" alt="<?=$produto['nome'];?>">
 								<figcaption><?=$produto['nome'];?><span class="preco">
 									<?=mostraPreco($produto['valor'],$produto['desconto']);?></span></figcaption>
+							</a>
+							<?php 
+                            if(@array_key_exists($produto['id'], $_SESSION['carrinho'])){    ?>
+                                <div class="noCarrinho" id="<?=$produto['id'];?>">no carrinho!</div>
+                            <?php 
+                            } else { ?>
+                                <div class="rapida" id="<?=$produto['id'];?>" onclick="compraRapida(<?=$produto['id'];?>, '<?=$produto['nome'];?>', 1, <?=($produto['valor'] - $produto['desconto']);?>)">compra rápida</div>
+                            <?php 
+                            }?>
+												
 							</figure>
-						</a>
 						</div> 
 				    <?php						
 					}
